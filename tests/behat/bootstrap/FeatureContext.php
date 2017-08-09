@@ -1,13 +1,12 @@
 <?php
 
-use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Behat\Context\Context;
-use Behat\MinkExtension\Context\RawMinkContext;
+use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
+use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends RawMinkContext implements Context
+class FeatureContext extends RawWordpressContext
 {
     /**
      * Initializes context.
@@ -25,7 +24,7 @@ class FeatureContext extends RawMinkContext implements Context
      */
     public function iAmOnGoogle()
     {
-        $this->visitPath( '/' );
+        $this->visitPath( '/')
     }
 
     /**
