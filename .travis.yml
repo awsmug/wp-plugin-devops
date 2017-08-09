@@ -42,6 +42,7 @@ before_script:
 - cd "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
 - phpenv rehash
 script:
+- find / -name "wp-content"
 - if [[ "$PHPLINT" == "1" ]]; then find -L .  -path ./vendor -prune -o -name '*.php'
   -print0 | xargs -0 -n 1 -P 4 php -l; fi
 - if [[ -z "$CODECLIMATE_REPO_TOKEN" ]]; then COVERAGE="0"; fi
