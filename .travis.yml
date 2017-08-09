@@ -7,5 +7,5 @@ php:
 install:
   composer install
 script:
-  phpunit --configuration ./phpunit.xml
-  ./vendor/bin/behat
+  - phpunit --configuration ./phpunit.xml
+  - ./vendor/bin/behat
