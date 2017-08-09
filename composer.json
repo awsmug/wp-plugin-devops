@@ -1,4 +1,8 @@
 {
+    "name": "awsmug/wp-test-suite",
+    "type": "wordpress-plugin",
+    "description": "WordPtess test suite",
+    "license": "GPL-3.0",
     "require-dev": {
         "paulgibbs/behat-wordpress-extension": "^0.7.0",
         "behat/behat": "^3.3",
