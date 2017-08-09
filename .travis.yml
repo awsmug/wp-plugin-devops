@@ -4,12 +4,6 @@ cache:
   directories:
     - vendor
     - $HOME/.composer/cache
-    
-php:
-  - 5.6
-  - 7.0
-  - 7.1
-  - nightly
 
 matrix:
   include:
@@ -54,3 +48,4 @@ script:
 - if [[ -z "$CODECLIMATE_REPO_TOKEN" ]]; then COVERAGE="0"; fi
 - if [[ "$COVERAGE" == "1" ]]; then phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml; else phpunit -c phpunit.xml; fi
 - if [[ "$COVERAGE" == "1" ]]; then vendor/bin/test-reporter; fi
+- vendor/bin/behat
