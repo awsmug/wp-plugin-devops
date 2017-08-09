@@ -24,7 +24,7 @@ class FeatureContext extends RawWordpressContext
      */
     public function iAmOnGoogle()
     {
-        $this->visitPath( '/')
+        $this->visitPath( '/');
     }
 
     /**
