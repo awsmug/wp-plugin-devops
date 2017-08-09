@@ -48,7 +48,7 @@ install:
   - tests/bin/nginx.sh
 
 before_script:
-  - bin/travis/selenium.sh
+  - tests/bin/selenium.sh
   - PLUGIN_SLUG=$(basename $(pwd))
   - cd ..
   - cp -r "$PLUGIN_SLUG" "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
