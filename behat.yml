@@ -5,7 +5,6 @@ default:
     default:
       paths: [ %paths.base%/tests/behat/features ]
     contexts:
-      - FeatureContext
       - Behat\MinkExtension\Context\MinkContext
       - PaulGibbs\WordpressBehatExtension\Context\ContentContext
       - PaulGibbs\WordpressBehatExtension\Context\DashboardContext
