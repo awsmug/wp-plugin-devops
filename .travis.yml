@@ -1,29 +1,26 @@
 language: php
-
 cache:
   directories:
-    - vendor
-    - $HOME/.composer/cache
-
+  - vendor
+  - $HOME/.composer/cache
 matrix:
   include:
-    - php: 7.1
-      env: WP_VERSION=master WP_MULTISITE=1 PHPLINT=1 COVERAGE=1
-    - php: 7.0
-      env: WP_VERSION=4.8
-    - php: 7.0
-      env: WP_VERSION=4.7
-    - php: 7.0
-      env: WP_VERSION=4.6
-    - php: 7.0
-      env: WP_VERSION=4.5
-    - php: 5.6
-      env: WP_VERSION=4.8
-    - php: 5.6
-      env: WP_VERSION=4.7
-    - php: 5.6
-      env: WP_VERSION=4.6
-
+  - php: 7.1
+    env: WP_VERSION=master WP_MULTISITE=1 PHPLINT=1 COVERAGE=1
+  - php: 7.0
+    env: WP_VERSION=4.8
+  - php: 7.0
+    env: WP_VERSION=4.7
+  - php: 7.0
+    env: WP_VERSION=4.6
+  - php: 7.0
+    env: WP_VERSION=4.5
+  - php: 5.6
+    env: WP_VERSION=4.8
+  - php: 5.6
+    env: WP_VERSION=4.7
+  - php: 5.6
+    env: WP_VERSION=4.6
 before_script:
 - phpenv local 5.6
 - composer selfupdate 1.0.0 --no-interaction
@@ -42,15 +39,14 @@ before_script:
 - mysql -e "CREATE DATABASE wordpress_tests;" -uroot
 - cd "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
 - phpenv rehash
-
 script:
-- if [[ "$PHPLINT" == "1" ]]; then find -L .  -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l; fi
+- if [[ "$PHPLINT" == "1" ]]; then find -L .  -path ./vendor -prune -o -name '*.php'
+  -print0 | xargs -0 -n 1 -P 4 php -l; fi
 - if [[ -z "$CODECLIMATE_REPO_TOKEN" ]]; then COVERAGE="0"; fi
-- if [[ "$COVERAGE" == "1" ]]; then phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml; else phpunit -c phpunit.xml; fi
+- if [[ "$COVERAGE" == "1" ]]; then phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml;
+  else phpunit -c phpunit.xml; fi
 - if [[ "$COVERAGE" == "1" ]]; then vendor/bin/test-reporter; fi
 - vendor/bin/behat
-
 notifications:
   slack:
-    rooms:
-      - awsmug:ansVKTRDQOgPx2q6ZVBOGyHr#dev
+    secure: SUzXpLx+mr8fyKpzvOO8DXlmfVQhooePjCSz/JSLa1DdFgqX2kwWQsQWzDIVrpKMj+It1QtnZTr2B5rXV/C0isiwO30OYLS3+1srWQPHIuX0vVFfmJXmLw8mHPnaQB3DSdqTeH/t3ZyhUPvO3ZBScTQfg/WNxrJSL/j/VJVpuke0b/YgF5GNE/Bo44WDOxM4tkUj9GEeuYLTJG/xNbSo5kP6HxRR9wO5zumtlBkx/iIqw+QBY1x0n3P8QDdD5i1+mRyJz/2GB9ES0SC2ZA3aV1M4JLWQKwYgtznkBpBMARxFIkPBjPqPn+ojeIxrWM2W1dGaYK4WjAIgjFtk4/HrEigTYl96c69wztlWkI99qIp3y5KM49Inb+1Mwd0Ub9j8Rfzab9pnWb37jP4ctySRLf56S7SMFJ2XCDc/jirTVLK9SwgCS/og8LJ2FuFzmJjHS+6QCfqomYVOF9EnJCqontfCG7ks7VXrGXuMdfEyvZi/7OyHsecFk70XfGWA5f82FFRdVxJL5uFvCckC7EMhAGhA/XPuYv2FFSnU4eN9/prQsHxDUD/UGm2vu5JuCuEHJ43crzD1btGQAJOTDoTSH+fugK9ONlDLNaK96ojFq7aERgyl9bDz3QRlCjOGj5L0GfQbRhHy5hAYHVMwabUR/Wr3vsCq0lT8GgdM4I1wMtU=
