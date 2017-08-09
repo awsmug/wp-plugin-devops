@@ -5,6 +5,6 @@ class StackTest extends TestCase
 {
 	public function testPushAndPop()
 	{
-		$this->asseertTrue( true );
+		$this->assertTrue( true );
 	}
 }
