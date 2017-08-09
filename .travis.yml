@@ -53,4 +53,4 @@ script:
 notifications:
   slack:
     rooms:
-      - awsmug:ansVKTRDQOgPx2q6ZVBOGyHr#general
+      - awsmug:ansVKTRDQOgPx2q6ZVBOGyHr#dev
