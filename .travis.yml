@@ -37,7 +37,7 @@ before_script:
 - cd ..
 - cp -r "$PLUGIN_SLUG" "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
 - cd /tmp/wordpress/
-- ls /tmp/wordpress/
+- ls /tmp/wordpress/src/
 - cp wp-tests-config-sample.php wp-tests-config.php
 - sed -i "s/youremptytestdbnamehere/wordpress_tests/" wp-tests-config.php
 - sed -i "s/yourusernamehere/travis/" wp-tests-config.php
@@ -47,6 +47,7 @@ before_script:
 - phpenv rehash
 
 script:
+- ls /tmp/wordpress/src/
 - if [[ "$BEHAT" == "1" ]]; then vendor/bin/behat -dl; fi
 - if [[ "$PHPLINT" == "1" ]]; then find -L .  -path ./vendor -prune -o -name '*.php'
   -print0 | xargs -0 -n 1 -P 4 php -l; fi
