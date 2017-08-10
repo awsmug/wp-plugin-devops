@@ -1,35 +1,35 @@
 language: php
 
-               cache:
-                 directories:
-                 - vendor
-                 - $HOME/.composer/cache
+cache:
+  directories:
+  - vendor
+  - $HOME/.composer/cache
 
-               addons:
-                 apt:
-                   packages:
-                     - nginx
-                 hosts:
-                   - wordpress.dev
+addons:
+  apt:
+    packages:
+      - nginx
+  hosts:
+    - wordpress.dev
 
-               matrix:
-                 include:
-                 - php: 7.1
-                   env: WP_VERSION=4.8.1 WP_MULTISITE=1 PHPLINT=1 COVERAGE=1 BEHAT=1
+matrix:
+  include:
+  - php: 7.1
+    env: WP_VERSION=4.8.1 WP_MULTISITE=1 PHPLINT=1 COVERAGE=1 BEHAT=1
 
-               before_install:
-                 - composer self-update
-                 - composer validate
-                 - phpenv config-rm xdebug.ini
-                 - export CURRENT_DIR=$(pwd)
-                 - export NGINX_DIR=/tmp
-                 - export WP_DIR="$CURRENT_DIR/www/"
-                 - export WP_DEVELOP_DIR=/tmp/wordpress/
+before_install:
+  - composer self-update
+  - composer validate
+  - phpenv config-rm xdebug.ini
+  - export CURRENT_DIR=$(pwd)
+  - export NGINX_DIR=/tmp
+  - export WP_DIR="$CURRENT_DIR/www/"
+  - export WP_DEVELOP_DIR=/tmp/wordpress/
 
-               install:
-                 - composer install --prefer-dist --no-progress --no-dev
-                 - PATH=$PATH:./vendor/bin:./tests/bin/
-                 - export PATH
+install:
+  - composer install --prefer-dist --no-progress --no-dev
+  - PATH=$PATH:./vendor/bin:./tests/bin/
+  - export PATH
 
 before_script:
   - if [[ "$BEHAT" == "1" ]]; then wordpress.sh wordpress root '' localhost $WP_VERSION WP_DIR=$WP_DIR; fi
