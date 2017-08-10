@@ -4,7 +4,3 @@ install:
 - TRAVIS_VAR=Zwei
 - export TRAVIS_VAR
 - ./testscript.sh
-
-script:
-- echo $TRAVIS_VAR
-- echo $SCRIPT_VAR
