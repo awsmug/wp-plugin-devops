@@ -43,7 +43,7 @@ before_script:
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
   - cd ..
   - ls -l $WP_DEVELOP_DIR
-  - cp -r "$PLUGIN_SLUG" "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
+  - cp -r "$PLUGIN_SLUG" "$WP_DIR/wp-content/plugins/$PLUGIN_SLUG"
 
 script:
   - if [[ "$BEHAT" == "1" ]]; then behat -dl; fi
