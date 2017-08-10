@@ -21,6 +21,7 @@ WH_WORDPRESS_DIR=${WH_WORDPRESS_DIR-/tmp/wordpress}
 
 ls -l
 ls -l ./vendor
+composer install
 
 # Download.
 mkdir -p $WH_WORDPRESS_DIR
