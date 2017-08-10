@@ -32,13 +32,14 @@ before_install:
   - export WP_DIR="$CURRENT_DIR/www/"
   - export WP_DEVELOP_DIR=/tmp/wordpress/
   - export PLUGIN_SLUG=$(basename $(pwd))
+  - ls vendor
 
 install:
   - composer install --prefer-dist --no-progress --no-dev
-  - ls vendor/bin
+  - ls vendor
 
 before_script:
-  - ls vendor/bin
+  - ls vendor
   - if [[ "$BEHAT" == "1" ]]; then wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION WP_DIR=$WP_DIR; fi
   - if [[ "$BEHAT" == "1" ]]; then nginx.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
