@@ -46,10 +46,8 @@ before_script:
   - cd "$PLUGIN_SLUG"
 
 script:
-  - if [[ "$BEHAT" == "1" ]]; then vendor/bin/behat -dl; fi
-  - if [[ "PHPUNIT" == "1" ]]; then phpunit -c phpunit.xml; fi
-  - vendor/bin/behat
-  - phpunit -c phpunit.xml
+  - if [[ "$BEHAT" == "1" ]]; then vendor/bin/behat; fi
+  - if [[ "$PHPUNIT" == "1" ]]; then phpunit -c phpunit.xml; fi
 
 notifications:
   email: false
