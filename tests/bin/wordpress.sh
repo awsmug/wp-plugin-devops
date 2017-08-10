@@ -9,6 +9,9 @@ if [ $# -lt 3 ]; then
   exit 1
 fi
 
+PATH=$PATH:./vendor/bin:./tests/bin/
+export PATH
+
 DB_NAME=$1
 DB_USER=$2
 DB_PASS=$3
