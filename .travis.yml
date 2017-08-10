@@ -44,14 +44,12 @@ before_install:
 
 install:
   - composer update --prefer-dist --no-progress --no-dev
-  - PATH=$PATH:./vendor/bin
+  - PATH=$PATH:./vendor/bin:./tests/bin/
   - export PATH
-  - PATH=$PATH:./tests/bin/
-  - export PATH
-  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh wordpress root '' localhost $WP_VERSION; fi
-  - if [[ "$BEHAT" == "1" ]]; then nginx.sh wordpress root '' localhost $WP_VERSION; fi
 
 before_script:
+  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh wordpress root '' localhost $WP_VERSION; fi
+  - if [[ "$BEHAT" == "1" ]]; then nginx.sh wordpress root '' localhost $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh wordpress root '' localhost $WP_VERSION; fi
   - export PLUGIN_SLUG=$(basename $(pwd))
   - echo $PLUGIN_SLUG
