@@ -4,7 +4,6 @@
 # http://www.peterbe.com/plog/set-ex
 set -ex
 
-WP_DIR=${WP_DIR-/tmp/wordpress}
 NAP_LENGTH=1
 SELENIUM_PORT=4444
 
