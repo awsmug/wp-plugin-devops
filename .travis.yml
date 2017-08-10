@@ -44,8 +44,12 @@ before_install:
 
 install:
   - composer update --prefer-dist --no-progress --no-dev
+  - echo "Acutal Path: $(pwd)"
+  - ls ./vendor
   - tests/bin/wordpress.sh wordpress root '' localhost $WP_VERSION
   - tests/bin/nginx.sh
+  - PATH=$PATH:/vendor/bin
+  - export PATH
 
 before_script:
   - tests/bin/selenium.sh
