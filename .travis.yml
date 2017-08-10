@@ -48,7 +48,7 @@ before_script:
 script:
   - if [[ "$BEHAT" == "1" ]]; then vendor/bin/behat -dl; fi
   - if [[ "PHPUNIT" == "1" ]]; then phpunit -c phpunit.xml; fi
-  - vendor/bin/behat -dl
+  - vendor/bin/behat
   - phpunit -c phpunit.xml
 
 notifications:
