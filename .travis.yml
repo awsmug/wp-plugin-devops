@@ -45,7 +45,7 @@ before_install:
 install:
   - composer update --prefer-dist --no-progress --no-dev
   - echo $(pwd)
-  - ls ./vendor
+  - ls ./
   - tests/bin/wordpress.sh wordpress root '' localhost $WP_VERSION
   - tests/bin/nginx.sh
   - PATH=$PATH:/vendor/bin
