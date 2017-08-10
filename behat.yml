@@ -2,7 +2,7 @@ default:
   suites:
     default:
       paths:
-        - %paths.base%/../../tests/behat
+        - %paths.base%/tests/behat
       contexts:
         - Behat\MinkExtension\Context\MinkContext
         - PaulGibbs\WordpressBehatExtension\Context\ContentContext
