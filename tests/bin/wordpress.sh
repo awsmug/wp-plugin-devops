@@ -24,12 +24,12 @@ ls ./vendor
 
 # Download.
 mkdir -p $WH_WORDPRESS_DIR
-wp core download --force --version=$WP_VERSION --path=$WH_WORDPRESS_DIR
+./vendor/bin/wp core download --force --version=$WP_VERSION --path=$WH_WORDPRESS_DIR
 
 # Create config.
 rm -f ${WH_WORDPRESS_DIR}wp-config.php
-wp core config --path=$WH_WORDPRESS_DIR --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$DB_HOST
+./vendor/bin/wp core config --path=$WH_WORDPRESS_DIR --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_PASS --dbhost=$DB_HOST
 
 # Install.
-wp db create --path=$WH_WORDPRESS_DIR
-wp core install --path=$WH_WORDPRESS_DIR --url="wordpress.dev:8080" --title="wordpress.dev" --admin_user="admin" --admin_password="password" --admin_email="admin@wp.dev"
+./vendor/bin/wp db create --path=$WH_WORDPRESS_DIR
+./vendor/bin/wp core install --path=$WH_WORDPRESS_DIR --url="wordpress.dev:8080" --title="wordpress.dev" --admin_user="admin" --admin_password="password" --admin_email="admin@wp.dev"
