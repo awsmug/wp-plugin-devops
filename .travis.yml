@@ -27,7 +27,7 @@ before_install:
   - export NGINX_DIR=/tmp
   - export DB_NAME="wordpress"
   - export DB_USER="root"
-  - export DB_PASS=""
+  - export DB_PASS="root"
   - export DB_HOST="localhost"
   - export WP_DIR="$CURRENT_DIR/www/"
   - export WP_DEVELOP_DIR=/tmp/wordpress/
