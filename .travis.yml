@@ -21,22 +21,23 @@ before_install:
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
+
+  - export PATH=$PATH:./vendor/bin:./tests/bin/
   - export CURRENT_DIR=$(pwd)
   - export NGINX_DIR=/tmp
-  - export WP_DIR="$CURRENT_DIR/www/"
-  - export WP_DEVELOP_DIR=/tmp/wordpress/
   - export DB_NAME="wordpress"
   - export DB_USER="root"
   - export DB_PASS=""
   - export DB_HOST="localhost"
+  - export WP_DIR="$CURRENT_DIR/www/"
+  - export WP_DEVELOP_DIR=/tmp/wordpress/
   - export PLUGIN_SLUG=$(basename $(pwd))
 
 install:
   - composer install --prefer-dist --no-progress --no-dev
-  - PATH=$PATH:./vendor/bin:./tests/bin/
-  - export PATH
 
 before_script:
+  - echo $DB_NAME
   - if [[ "$BEHAT" == "1" ]]; then wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION WP_DIR=$WP_DIR; fi
   - if [[ "$BEHAT" == "1" ]]; then nginx.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
