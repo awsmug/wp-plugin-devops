@@ -32,7 +32,7 @@ install:
   - export PATH
 
 before_script:
-  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh wordpress root '' localhost $WP_VERSION; fi
+  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh wordpress root '' localhost $WP_VERSION WP_DIR=$WP_DIR; fi
   - if [[ "$BEHAT" == "1" ]]; then nginx.sh wordpress root '' localhost $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh wordpress root '' localhost $WP_VERSION; fi
   - export PLUGIN_SLUG=$(basename $(pwd))
