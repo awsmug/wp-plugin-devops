@@ -43,6 +43,7 @@ before_script:
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh; fi
   - cd ..
   - cp -r "$PLUGIN_SLUG" "$WP_DIR/wp-content/plugins/$PLUGIN_SLUG"
+  - cd "$PLUGIN_SLUG"
 
 script:
   - ls vendor
