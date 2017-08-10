@@ -43,7 +43,7 @@ before_install:
   - export WP_DEVELOP_DIR=/tmp/wordpress/
 
 install:
-  - composer update --prefer-dist --no-progress --no-dev
+  - composer install --prefer-dist --no-progress --no-dev
   - PATH=$PATH:./vendor/bin:./tests/bin/
   - export PATH
 
