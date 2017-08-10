@@ -35,16 +35,11 @@ before_install:
 
 install:
   - composer install --no-progress
-  - ls vendor
-  - ls vendor/composer
 
 before_script:
-  - ls vendor
-  - ls vendor/composer
-  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION WP_DIR=$WP_DIR; fi
+  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION $WP_DIR; fi
   - if [[ "$BEHAT" == "1" ]]; then nginx.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
-  - echo $PLUGIN_SLUG
   - cd ..
   - ls -l $WP_DEVELOP_DIR
   - cp -r "$PLUGIN_SLUG" "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
