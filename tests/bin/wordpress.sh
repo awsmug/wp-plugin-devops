@@ -21,7 +21,7 @@ export PATH
 
 # Download.
 mkdir -p $WP_DIR
-./vendor/bin/wp core download --force --version=$WP_VERSION --path=$WP_DIR
+../../vendor/bin/wp core download --force --version=$WP_VERSION --path=$WP_DIR
 
 # Create config.
 rm -f ${WP_DIR}wp-config.php
