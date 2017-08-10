@@ -55,6 +55,7 @@ before_script:
   - export PLUGIN_SLUG=$(basename $(pwd))
   - echo $PLUGIN_SLUG
   - cd ..
+  - ls /tmp/wordpress/src/
   - cp -r "$PLUGIN_SLUG" "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
 
 script:
