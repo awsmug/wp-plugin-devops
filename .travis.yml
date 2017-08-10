@@ -44,22 +44,22 @@ before_install:
 
 install:
   - composer update --prefer-dist --no-progress --no-dev
-  - echo $(pwd)
-  - ls ./
-  - tests/bin/wordpress.sh wordpress root '' localhost $WP_VERSION
-  - tests/bin/nginx.sh
-  - PATH=$PATH:/vendor/bin
+  - PATH=$PATH:./vendor/bin
   - export PATH
+  - PATH=$PATH:./tests/bin/
+  - export PATH
+  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh wordpress root '' localhost $WP_VERSION; fi
+  - if [[ "$BEHAT" == "1" ]]; then nginx.sh wordpress root '' localhost $WP_VERSION; fi
 
 before_script:
-  - tests/bin/selenium.sh
+  - if [[ "$BEHAT" == "1" ]]; then selenium.sh wordpress root '' localhost $WP_VERSION; fi
   - export PLUGIN_SLUG=$(basename $(pwd))
   - echo $PLUGIN_SLUG
   - cd ..
   - cp -r "$PLUGIN_SLUG" "/tmp/wordpress/src/wp-content/plugins/$PLUGIN_SLUG"
 
 script:
-  - if [[ "$BEHAT" == "1" ]]; then vendor/bin/behat -dl; fi
+  - if [[ "$BEHAT" == "1" ]]; then ./vendor/bin/behat -dl; fi
   - if [[ "$PHPLINT" == "1" ]]; then find -L .  -path ./vendor -prune -o -name '*.php'
     -print0 | xargs -0 -n 1 -P 4 php -l; fi
   - if [[ -z "$CODECLIMATE_REPO_TOKEN" ]]; then COVERAGE="0"; fi
