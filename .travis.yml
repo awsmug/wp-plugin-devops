@@ -4,5 +4,5 @@ script:
 - TRAVIS_VAR=Zwei
 - export TRAVIS_VAR
 - echo "Travis variable in Travis: $TRAVIS_VAR"
-- testscript.sh
+- ./testscript.sh
 - echo "Script variable in Script: $SCRIPT_VAR"
