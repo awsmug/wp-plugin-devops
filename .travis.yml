@@ -44,6 +44,7 @@ before_script:
   - cd ..
   - cp -r "$PLUGIN_SLUG" "$WP_DIR/wp-content/plugins/$PLUGIN_SLUG"
   - cd "$PLUGIN_SLUG"
+  - wp plugin activate $PLUGIN_SLUG --path=$WP_DIR
 
 script:
   - if [[ "$BEHAT" == "1" ]]; then behat; fi
