@@ -34,10 +34,12 @@ before_install:
   - export PLUGIN_SLUG=$(basename $(pwd))
 
 install:
-  - composer install --prefer-dist --no-progress --no-dev
+  - composer install --no-progress
+  - ls vendor
   - ls vendor/composer
 
 before_script:
+  - ls vendor
   - ls vendor/composer
   - if [[ "$BEHAT" == "1" ]]; then wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION WP_DIR=$WP_DIR; fi
   - if [[ "$BEHAT" == "1" ]]; then nginx.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
