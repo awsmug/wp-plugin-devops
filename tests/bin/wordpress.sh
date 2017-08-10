@@ -20,7 +20,7 @@ WP_VERSION=${5-latest}
 WH_WORDPRESS_DIR=${WH_WORDPRESS_DIR-/tmp/wordpress}
 
 ls -l
-ls ./vendor
+ls -l ./vendor
 
 # Download.
 mkdir -p $WH_WORDPRESS_DIR
