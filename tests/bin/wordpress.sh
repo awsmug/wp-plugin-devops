@@ -16,11 +16,11 @@ DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
 WP_DIR=${WP_DIR-/tmp/wordpress}
 
-ls -l ./vendor
+ls ./vendor/bin
 
 # Download.
 mkdir -p $WP_DIR
-../../vendor/bin/wp core download --force --version=$WP_VERSION --path=$WP_DIR
+wp core download --force --version=$WP_VERSION --path=$WP_DIR
 
 # Create config.
 rm -f ${WP_DIR}wp-config.php
