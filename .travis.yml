@@ -54,8 +54,8 @@ script:
   - if [[ "$COVERAGE" == "1" ]]; then vendor/bin/test-reporter; fi
 
 notifications:
+  email: false
   slack:
-    email: false
     secure: SUzXpLx+mr8fyKpzvOO8DXlmfVQhooePjCSz/JSLa1DdFgqX2kwWQsQWzDIVrpKMj+It1QtnZTr2B5rXV/C0isiwO30OYLS3+1srWQPHIuX0vVFfmJXmLw8mHPnaQB3DSdqTeH/t3ZyhUPvO3ZBScTQfg/WNxrJSL/j/VJVpuke0b/YgF5GNE/Bo44WDOxM4tkUj9GEeuYLTJG/xNbSo5kP6HxRR9wO5zumtlBkx/iIqw+QBY1x0n3P8QDdD5i1+mRyJz/2GB9ES0SC2ZA3aV1M4JLWQKwYgtznkBpBMARxFIkPBjPqPn+ojeIxrWM2W1dGaYK4WjAIgjFtk4/HrEigTYl96c69wztlWkI99qIp3y5KM49Inb+1Mwd0Ub9j8Rfzab9pnWb37jP4ctySRLf56S7SMFJ2XCDc/jirTVLK9SwgCS/og8LJ2FuFzmJjHS+6QCfqomYVOF9EnJCqontfCG7ks7VXrGXuMdfEyvZi/7OyHsecFk70XfGWA5f82FFRdVxJL5uFvCckC7EMhAGhA/XPuYv2FFSnU4eN9/prQsHxDUD/UGm2vu5JuCuEHJ43crzD1btGQAJOTDoTSH+fugK9ONlDLNaK96ojFq7aERgyl9bDz3QRlCjOGj5L0GfQbRhHy5hAYHVMwabUR/Wr3vsCq0lT8GgdM4I1wMtU=
 
 after_script:
