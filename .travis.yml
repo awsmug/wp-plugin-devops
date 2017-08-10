@@ -21,9 +21,9 @@ before_install:
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
-  - export WH_DIR=$(pwd)
-  - export WH_NGINX_DIR=/tmp
-  - export WH_WORDPRESS_DIR="$WH_DIR/www/"
+  - export CURRENT_DIR=$(pwd)
+  - export NGINX_DIR=/tmp
+  - export WP_DIR="$CURRENT_DIR/www/"
   - export WP_DEVELOP_DIR=/tmp/wordpress/
 
 install:
@@ -32,7 +32,6 @@ install:
   - export PATH
 
 before_script:
-  - ls -l ./vendor
   - if [[ "$BEHAT" == "1" ]]; then wordpress.sh wordpress root '' localhost $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then nginx.sh wordpress root '' localhost $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh wordpress root '' localhost $WP_VERSION; fi
