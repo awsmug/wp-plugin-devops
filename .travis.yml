@@ -15,7 +15,26 @@ addons:
 matrix:
   include:
   - php: 7.1
-    env: WP_VERSION=4.8.1 BEHAT=1 PHPUNIT=1
+    env: WP_VERSION=latest BEHAT=1 PHPUNIT=1
+  - php: 7.1
+    env: WP_VERSION=4.8 BEHAT=1 PHPUNIT=1
+  - php: 7.1
+    env: WP_VERSION=4.7 BEHAT=1 PHPUNIT=1
+  - php: 7.1
+    env: WP_VERSION=4.6 BEHAT=1 PHPUNIT=1
+  - php: 7.0
+    env: WP_VERSION=4.8 PHPUNIT=1
+  - php: 7.0
+    env: WP_VERSION=4.7 PHPUNIT=1
+  - php: 7.0
+    env: WP_VERSION=4.6 PHPUNIT=1
+  - php: 5.6
+    env: WP_VERSION=4.8 PHPUNIT=1
+  - php: 5.6
+    env: WP_VERSION=4.7 PHPUNIT=1
+  - php: 5.6
+    env: WP_VERSION=4.6 PHPUNIT=1
+
 
 before_install:
   - composer self-update
