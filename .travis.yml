@@ -30,6 +30,7 @@ before_install:
   - export DB_PASS="root"
   - export DB_HOST="localhost"
   - export WP_DIR="/tmp/wordpress/"
+  - export PLUGIN_DIR=$(pwd)
   - export PLUGIN_SLUG=$(basename $(pwd))
 
 install:
@@ -45,8 +46,6 @@ before_script:
   - cd "$PLUGIN_SLUG"
 
 script:
-  - ls vendor
-  - ls vendor/bin
   - if [[ "$BEHAT" == "1" ]]; then vendor/bin/behat -dl; fi
   - if [[ "PHPUNIT" == "1" ]]; then phpunit -c phpunit.xml; fi
 
