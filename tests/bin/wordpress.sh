@@ -16,6 +16,9 @@ DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
 WH_WORDPRESS_DIR=${WH_WORDPRESS_DIR-/tmp/wordpress}
 
+ls -l
+ls ./vendor
+
 # Download.
 mkdir -p $WH_WORDPRESS_DIR
 wp core download --force --version=$WP_VERSION --path=$WH_WORDPRESS_DIR
