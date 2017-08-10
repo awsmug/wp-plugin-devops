@@ -48,6 +48,7 @@ install:
   - export PATH
 
 before_script:
+  - ls -l ./vendor
   - if [[ "$BEHAT" == "1" ]]; then wordpress.sh wordpress root '' localhost $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then nginx.sh wordpress root '' localhost $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh wordpress root '' localhost $WP_VERSION; fi
