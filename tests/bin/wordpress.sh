@@ -9,9 +9,6 @@ if [ $# -lt 3 ]; then
   exit 1
 fi
 
-PATH=$PATH:./vendor/bin:./tests/bin/
-export PATH
-
 DB_NAME=$1
 DB_USER=$2
 DB_PASS=$3
@@ -19,9 +16,10 @@ DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
 WH_WORDPRESS_DIR=${WH_WORDPRESS_DIR-/tmp/wordpress}
 
-ls -l
-ls -l ./vendor
 composer install
+
+PATH=$PATH:./vendor/bin:./tests/bin/
+export PATH
 
 # Download.
 mkdir -p $WH_WORDPRESS_DIR
