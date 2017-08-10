@@ -38,7 +38,7 @@ install:
 
 before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh "$DB_NAME" "$DB_USER" "$DB_PASS" "$DB_HOST" "$WP_VERSION2 "$WP_DIR"; fi
+  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION $WP_DIR; fi
   - if [[ "$BEHAT" == "1" ]]; then nginx.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
   - if [[ "$BEHAT" == "1" ]]; then selenium.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION; fi
   - cd ..
