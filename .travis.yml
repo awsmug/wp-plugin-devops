@@ -45,6 +45,8 @@ before_script:
   - cp -r "$PLUGIN_SLUG" "$WP_DIR/wp-content/plugins/$PLUGIN_SLUG"
 
 script:
+  - ls vendor
+  - ls vendor/bin
   - if [[ "$BEHAT" == "1" ]]; then vendor/bin/behat -dl; fi
   - if [[ "$PHPLINT" == "1" ]]; then find -L . -path ./vendor -prune -o -name '*.php'
     -print0 | xargs -0 -n 1 -P 4 php -l; fi
