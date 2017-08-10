@@ -16,6 +16,8 @@ DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
 WP_DIR=${WP_DIR-/tmp/wordpress}
 
+echo $(pwd)
+
 PATH=$PATH:./vendor/bin:./tests/bin/
 export PATH
 
