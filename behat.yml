@@ -4,6 +4,7 @@ default:
       paths:
         - %paths.base%/tests/behat
       contexts:
+        - TestcaseContext
         - Behat\MinkExtension\Context\MinkContext
         - PaulGibbs\WordpressBehatExtension\Context\ContentContext
         - PaulGibbs\WordpressBehatExtension\Context\DashboardContext
