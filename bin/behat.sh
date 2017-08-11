@@ -1,8 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-echo $BEHAT
-
-if [ $BEHAT == "1" ]; then wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION $WP_DIR; fi
+if [[ "$BEHAT" == "1" ]]; then wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION $WP_DIR; fi
 if [[ "$BEHAT" == "1" ]]; then nginx.sh; fi
 if [[ "$BEHAT" == "1" ]]; then selenium.sh; fi
 cd ..
