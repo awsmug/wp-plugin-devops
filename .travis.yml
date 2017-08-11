@@ -21,7 +21,7 @@ before_install:
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
-  - bin/init_vars.sh
+  - bin/init-vars.sh
 
 install:
   - echo $BIN_PATH
@@ -29,7 +29,7 @@ install:
 
 before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-  - init-behat.sh
+  - if [[ "$BEHAT" == "1" ]]; then init-behat.sh; fi
 
 script:
   - if [[ "$BEHAT" == "1" ]]; then behat; fi

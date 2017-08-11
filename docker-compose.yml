@@ -1,0 +1,19 @@
+version: "3"
+services:
+  webserver:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - "./src:/tmp"
+  php:
+    image: servivum/php:7.0-fpm
+  mysql:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
