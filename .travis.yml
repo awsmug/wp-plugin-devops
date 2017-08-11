@@ -18,8 +18,10 @@ matrix:
     env: WP_VERSION=latest BEHAT=1 PHPUNIT=1
 
 before_install:
-  - export BIN_PATH=$(pwd)
-  - export PATH=$PATH:$PROJECT_DIR/vendor/bin:$BIN_PATH
+  - export PROJECT_DIR=$(dirname $(pwd))
+  - export BIN_PATH=$(pwd)/bin
+  - export VENDOR_BIN_PATH=$PROJECT_DIR/vendor/bin
+  - export PATH=$PATH:$VENDOR_BIN_PATH:$BIN_PATH
   - export NGINX_DIR=/tmp
   - export WP_DIR="/tmp/wordpress/"
   - export PLUGIN_DIR=$(dirname $(pwd))
