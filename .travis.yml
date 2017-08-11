@@ -18,6 +18,16 @@ matrix:
     env: WP_VERSION=latest BEHAT=1 PHPUNIT=1
 
 before_install:
+  - export BIN_PATH=$(pwd)
+  - export PATH=$PATH:$PROJECT_DIR/vendor/bin:$BIN_PATH
+  - export NGINX_DIR=/tmp
+  - export WP_DIR="/tmp/wordpress/"
+  - export PLUGIN_DIR=$(dirname $(pwd))
+  - export PLUGIN_SLUG=$(basename $(pwd))
+  - export DB_NAME="wordpress"
+  - export DB_USER="root"
+  - export DB_PASS="root"
+  - export DB_HOST="localhost"
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
@@ -26,7 +36,6 @@ install:
   - composer install --no-progress
 
 before_script:
-  - source bin/init-vars.sh
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - if [[ "$BEHAT" == "1" ]]; then init-behat.sh; fi
 
