@@ -25,6 +25,7 @@ before_install:
 
 install:
   - echo $BIN_PATH
+  - echo $WP_DIR
   - composer install --no-progress
 
 before_script:
