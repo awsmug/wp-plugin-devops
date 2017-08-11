@@ -22,9 +22,9 @@ before_install:
   - composer validate
   - phpenv config-rm xdebug.ini
 
+  - export CURRENT_DIR=$(pwd)
   - export BIN_PATH="$CURRENT_DIR/bin"
   - export PATH=$PATH:./vendor/bin:$BIN_PATH
-  - export CURRENT_DIR=$(pwd)
   - export NGINX_DIR=/tmp
   - export DB_NAME="wordpress"
   - export DB_USER="root"
