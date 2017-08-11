@@ -21,7 +21,7 @@ before_install:
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
-  - bin/init-vars.sh
+  - source bin/init-vars.sh
 
 install:
   - echo $BIN_PATH
