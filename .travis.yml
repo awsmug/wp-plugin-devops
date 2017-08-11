@@ -22,8 +22,8 @@ before_install:
   - composer validate
   - phpenv config-rm xdebug.ini
 
-  - export BIN_DIR="$CURRENT_DIRbin"
-  - export PATH=$PATH:./vendor/bin:$BIN_DIR
+  - export BIN_PATH="$CURRENT_DIR/bin"
+  - export PATH=$PATH:./vendor/bin:$BIN_PATH
   - export CURRENT_DIR=$(pwd)
   - export NGINX_DIR=/tmp
   - export DB_NAME="wordpress"
@@ -35,7 +35,7 @@ before_install:
   - export PLUGIN_SLUG=$(basename $(pwd))
 
 install:
-  - echo $BIN_DIR
+  - echo $BIN_PATH
   - composer install --no-progress
 
 before_script:
