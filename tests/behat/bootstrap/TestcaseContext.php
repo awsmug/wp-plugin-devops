@@ -5,7 +5,7 @@ use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 /**
  * Defines application features from the specific context.
  */
-class TestcaseContext extends RawWordpressContext
+class FeatureContext extends RawWordpressContext
 {
     /**
      * Initializes context.
