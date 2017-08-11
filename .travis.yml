@@ -25,7 +25,7 @@ before_install:
   - export PROJECT_DIR=$(pwd)
   - export BIN_DIR=$PROJECT_DIR/bin/
   - export VENDOR_BIN_DIR=$PROJECT_DIR/vendor/bin/
-  - export PATH=$PATH:$PROJECT_DIR:$BIN_DIR
+  - export PATH=$PATH:$VENDOR_BIN_DIR:$BIN_DIR
   - export CURRENT_DIR=$(pwd)
   - export NGINX_DIR=/tmp
   - export DB_NAME="wordpress"
