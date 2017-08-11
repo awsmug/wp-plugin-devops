@@ -21,14 +21,12 @@ before_install:
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
-  - source bin/init-vars.sh
 
 install:
-  - echo $BIN_PATH
-  - echo $WP_DIR
   - composer install --no-progress
 
 before_script:
+  - source bin/init-vars.sh
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - if [[ "$BEHAT" == "1" ]]; then init-behat.sh; fi
 
