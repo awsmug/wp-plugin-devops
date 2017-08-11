@@ -18,32 +18,33 @@ matrix:
     env: WP_VERSION=latest BEHAT=1 PHPUNIT=1
 
 before_install:
-  - export PROJECT_DIR=$(dirname $(pwd))
-  - export BIN_PATH=$(pwd)/bin
-  - export VENDOR_BIN_PATH=$PROJECT_DIR/vendor/bin
-  - export PATH=$PATH:$VENDOR_BIN_PATH:$BIN_PATH
-  - export NGINX_DIR=/tmp
-  - export WP_DIR="/tmp/wordpress"
-  - export PLUGIN_DIR=$(dirname $(pwd))
-  - export PLUGIN_SLUG=$(basename $(pwd))
-  - export DB_NAME="wordpress"
-  - export DB_USER="root"
-  - export DB_PASS="root"
-  - export DB_HOST="localhost"
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
 
+  - export PATH=$PATH:./vendor/bin:./tests/bin/
+  - export CURRENT_DIR=$(pwd)
+  - export NGINX_DIR=/tmp
+  - export DB_NAME="wordpress"
+  - export DB_USER="root"
+  - export DB_PASS="root"
+  - export DB_HOST="localhost"
+  - export WP_DIR="/tmp/wordpress/"
+  - export PLUGIN_DIR=$(pwd)
+  - export PLUGIN_SLUG=$(basename $(pwd))
+
 install:
   - composer install --no-progress
-  - init-behat.sh
+
+before_script:
+  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
+  - if [[ "$BEHAT" == "1" ]]; then wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION $WP_DIR; fi
+  - if [[ "$BEHAT" == "1" ]]; then nginx.sh; fi
+  - if [[ "$BEHAT" == "1" ]]; then selenium.sh; fi
   - cd ..
   - cp -r "$PLUGIN_SLUG" "$WP_DIR/wp-content/plugins/$PLUGIN_SLUG"
   - cd "$PLUGIN_SLUG"
   - wp plugin activate $PLUGIN_SLUG --path=$WP_DIR
-
-before_script:
-  - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
 
 script:
   - if [[ "$BEHAT" == "1" ]]; then behat; fi
