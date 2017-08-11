@@ -29,7 +29,7 @@ install:
 
 before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-  - if [[ "$BEHAT" == "1" ]]; then bin/init-behat.sh; fi
+  - if [[ "$BEHAT" == "1" ]]; then init-behat.sh; fi
 
 script:
   - if [[ "$BEHAT" == "1" ]]; then behat; fi
