@@ -17,10 +17,3 @@ default:
               verify: false  # Allow self-signed SSL certificates
         selenium2:
           selenium2: ~
-
-    PaulGibbs\WordpressBehatExtension:
-      path: /tmp/wordpress/
-      users:
-        admin:
-          username: admin
-          password: password
