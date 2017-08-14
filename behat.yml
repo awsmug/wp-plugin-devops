@@ -3,7 +3,7 @@ default:
     default:
       paths:
         features: %paths.base%/tests/behat
-        bootstrap: %behat.paths.features%/bootstrap
+        bootstrap: %paths.base%/tests/behat/bootstrap
 
       contexts:
         - Behat\MinkExtension\Context\MinkContext
