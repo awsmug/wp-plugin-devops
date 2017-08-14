@@ -5,16 +5,6 @@ default:
         features: %paths.base%/tests/behat
         bootstrap: %paths.base%/tests/behat/bootstrap
 
-      contexts:
-        - Behat\MinkExtension\Context\MinkContext
-        - PaulGibbs\WordpressBehatExtension\Context\ContentContext
-        - PaulGibbs\WordpressBehatExtension\Context\DashboardContext
-        - PaulGibbs\WordpressBehatExtension\Context\SiteContext
-        - PaulGibbs\WordpressBehatExtension\Context\UserContext
-        - PaulGibbs\WordpressBehatExtension\Context\WordpressContext
-        - PaulGibbs\WordpressBehatExtension\Context\EditPostContext
-        - PaulGibbs\WordpressBehatExtension\Context\WidgetContext
-
   extensions:
     Behat\MinkExtension:
       base_url: http://wordpress.dev:8080
