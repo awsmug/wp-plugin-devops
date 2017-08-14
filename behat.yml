@@ -2,7 +2,9 @@ default:
   suites:
     default:
       paths:
-        - %paths.base%/tests/behat
+        features: %paths.base%/tests/behat
+        bootstrap: %behat.paths.features%/bootstrap
+
       contexts:
         - Behat\MinkExtension\Context\MinkContext
         - PaulGibbs\WordpressBehatExtension\Context\ContentContext
