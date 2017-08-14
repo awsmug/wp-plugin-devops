@@ -1,6 +1,7 @@
 <?php
 
 use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
+use Behat\Behat\Context\SnippetAcceptingContext;
 
 /**
  * Defines application features from the specific context.
