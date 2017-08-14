@@ -1,10 +1,9 @@
 default:
   suites:
     default:
-      autoload:
-          '': %paths.base%/tests/behat/bootstrap
       paths:
         features: %paths.base%/tests/behat
+        bootstrap: %paths.base%/tests/behat/bootstrap
 
       contexts:
         - Behat\MinkExtension\Context\MinkContext
