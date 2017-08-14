@@ -1,9 +1,5 @@
 default:
-  suites:
-    default:
-      paths:
-        features: %paths.base%/tests/behat
-        bootstrap: %paths.base%/tests/behat/bootstrap
+
 
   extensions:
     Behat\MinkExtension:
