@@ -2,7 +2,7 @@ default:
   suites:
     default:
       autoload:
-          '': %paths.base%/app/tests/acceptance
+          '': %paths.base%/tests/behat/bootstrap
       paths:
         features: %paths.base%/tests/behat
 
