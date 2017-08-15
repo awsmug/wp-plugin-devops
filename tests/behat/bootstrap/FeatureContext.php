@@ -2,6 +2,7 @@
 
 namespace PluginTests;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
 
@@ -20,4 +21,21 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
     public function __construct()
     {
     }
+
+	/**
+	 * @Given I am on my Site
+	 */
+	public function iAmOnMySite()
+	{
+		$this->visitPath( "/" );
+		$header = $this->getPage("Homepage")->find('css', 'h1' );
+		echo "Header is '" . $header . "'.'";
+	}
+	/**
+	 * @Then I see a heading named :arg1
+	 */
+	public function iSeeAHeadingNamed($arg1)
+	{
+		throw new PendingException();
+	}
 }
