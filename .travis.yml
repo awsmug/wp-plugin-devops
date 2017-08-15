@@ -50,7 +50,7 @@ before_script:
   - wp plugin activate $PLUGIN_SLUG --path=$WP_DIR
 
 script:
-  - if [[ "$BEHAT" == "1" ]]; then --config behat.yml; fi
+  - if [[ "$BEHAT" == "1" ]]; then behat --config behat.yml; fi
   - if [[ "$PHPUNIT" == "1" ]]; then phpunit -c phpunit.xml; fi
 
 notifications:
