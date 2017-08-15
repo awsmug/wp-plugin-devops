@@ -6,7 +6,7 @@ use Behat\Behat\Context\SnippetAcceptingContext;
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends RawWordpressContext
+class FeatureContext extends RawWordpressContext implements SnippetAcceptingContext
 {
     /**
      * Initializes context.
