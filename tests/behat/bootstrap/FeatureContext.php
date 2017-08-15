@@ -28,14 +28,16 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
 	public function iAmOnMySite()
 	{
 		$this->visitPath( "/" );
-		$header = $this->getPage("Homepage")->find('css', 'h1' );
-		echo "Header is '" . $header . "'.'";
+
 	}
 	/**
 	 * @Then I see a heading named :arg1
 	 */
 	public function iSeeAHeadingNamed($arg1)
 	{
-		throw new PendingException("We are pending here!");
+		$page = $this->getSession()->getPage();
+		$header = $page->find('h1' );
+		$header = $this->getPage("Homepage")->find('css', 'h1' );
+		echo "Header is '" . $header . "'.'";
 	}
 }
