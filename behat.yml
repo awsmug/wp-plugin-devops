@@ -1,6 +1,6 @@
 default:
   autoload:
-    - %paths.base%/features/bootstrap/
+    - %paths.base%/tests/behat/bootstrap
   suites:
     default:
       contexts:
