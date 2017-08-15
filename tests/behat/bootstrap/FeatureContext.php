@@ -30,5 +30,13 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
 		$this->visitPath( "/" );
 
 	}
-
+	/**
+	 * @Then I see a title named :arg1
+	 */
+	public function iSeeATitleNamed($arg1)
+	{
+		$page = $this->getSession()->getPage();
+		$node = $page->find('css','.site-title a' );
+		echo "Header is '" . $node->getText() . "'.'";
+	}
 }
