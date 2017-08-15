@@ -2,15 +2,15 @@
 
 namespace PluginTests;
 
-use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Mink\Exception\Exception;
-use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
+use Behat\Behat\Tester\Exception\PendingException;
+use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
+use PaulGibbs\WordpressBehatExtension\Context\UserContext;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends RawWordpressContext implements SnippetAcceptingContext
+class FeatureContext extends UserContext implements SnippetAcceptingContext
 {
     /**
      * Initializes context.
