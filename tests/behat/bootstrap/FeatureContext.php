@@ -36,6 +36,6 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
 	 */
 	public function iSeeAHeadingNamed($arg1)
 	{
-		throw new PendingException();
+		throw new PendingException("We are pending here!");
 	}
 }
