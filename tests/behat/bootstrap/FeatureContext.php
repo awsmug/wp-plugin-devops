@@ -34,7 +34,7 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
      */
     public function iSearchFor($arg1)
     {
-        throw new PendingException();
+        $this->
     }
 
     /**

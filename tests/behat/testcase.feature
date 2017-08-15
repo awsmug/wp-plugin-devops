@@ -1,7 +1,6 @@
-Feature: Searching Google
-  We are visiting the google and searching for behat
+Feature: Going to my Site
+  I am visiting my WordPress site
 
   Scenario: Visiting
-    Given I am on Google
-    When I search for "behat"
-    Then The first heading should contain "Behat"
+    Given I am on my Site
+    Then I see a heading named "WordPress Test"
