@@ -3,4 +3,4 @@ Feature: Going to my Site
 
   Scenario: Visiting
     Given I am on my Site
-    Then I see a heading named "WordPress Test"
+    Then I see a title named "WordPress Test"

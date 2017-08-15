@@ -31,12 +31,12 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
 
 	}
 	/**
-	 * @Then I see a heading named :arg1
+	 * @Then I see a title named: $title
 	 */
-	public function iSeeAHeadingNamed($arg1)
+	public function iSeeATitleNamed($title)
 	{
 		$page = $this->getSession()->getPage();
-		$header = $page->find('css','h1 a' );
-		echo "Header is '" . $header . "'.'";
+		$node = $page->find('css','.site-title a' );
+		echo "Header is '" . $node->getText() . "'.'";
 	}
 }
