@@ -37,7 +37,6 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
 	{
 		$page = $this->getSession()->getPage();
 		$header = $page->find('h1' );
-		$header = $this->getPage("Homepage")->find('css', 'h1' );
 		echo "Header is '" . $header . "'.'";
 	}
 }
