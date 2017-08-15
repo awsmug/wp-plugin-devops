@@ -1,7 +1,8 @@
 default:
   suites:
     default:
-      paths: %paths.base%/tests/behat
+      paths:
+        - %paths.base%/tests/behat
 
       contexts:
         - PluginTests\FeatureContext
