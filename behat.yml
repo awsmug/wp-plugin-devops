@@ -2,7 +2,8 @@ default:
   suites:
     default:
       paths:
-        - %paths.base%/tests/behat
+        features: %paths.base%/tests/behat
+        bootstrap: %paths.base%/tests/behat/bootstrap
 
       contexts:
         - FeatureContext
