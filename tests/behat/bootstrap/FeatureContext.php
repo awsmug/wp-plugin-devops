@@ -20,28 +20,4 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
     public function __construct()
     {
     }
-
-    /**
-     * @Given I am on Google
-     */
-    public function iAmOnGoogle()
-    {
-        $this->visitPath( '/');
-    }
-
-    /**
-     * @When I search for :arg1
-     */
-    public function iSearchFor($arg1)
-    {
-        $this->
-    }
-
-    /**
-     * @Then The first heading should contain :arg1
-     */
-    public function theFirstHeadingShouldContain($arg1)
-    {
-        throw new PendingException();
-    }
 }
