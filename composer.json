@@ -11,7 +11,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "PluginTests": "tests"},
+        "psr-4": { "PluginTests": "tests" }
     },
     "require-dev": {
         "paulgibbs/behat-wordpress-extension": "^0.7.0",
