@@ -3,6 +3,7 @@
 namespace PluginTests;
 
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Mink\Exception\Exception;
 use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
 
@@ -36,7 +37,11 @@ class FeatureContext extends RawWordpressContext implements SnippetAcceptingCont
 	public function iSeeATitleNamed($arg1)
 	{
 		$page = $this->getSession()->getPage();
-		$node = $page->find('css','.site-title a' );
-		echo "Header is '" . $node->getText() . "'.'";
+		$node = $page->find('css','.wrap h1' );
+		$title = $node->getText();
+
+		if( $title !== $arg1 ) {
+			throw new \Exception( "Title is " . $title . " but should be " . $arg1 );
+		}
 	}
 }
