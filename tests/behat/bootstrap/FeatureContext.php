@@ -4,14 +4,18 @@ namespace PluginTests;
 
 use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Behat\Tester\Exception\PendingException;
+use PaulGibbs\WordpressBehatExtension\Context\DashboardContext;
 use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 use PaulGibbs\WordpressBehatExtension\Context\UserContext;
+use PaulGibbs\WordpressBehatExtension\PageObject\Dashboard;
 
 /**
  * Defines application features from the specific context.
  */
 class FeatureContext extends UserContext implements SnippetAcceptingContext
 {
+	public $dashboard;
+
     /**
      * Initializes context.
      *
@@ -31,6 +35,23 @@ class FeatureContext extends UserContext implements SnippetAcceptingContext
 		$this->visitPath( "/" );
 
 	}
+
+	/**
+	 * @Then I am on the Dashboard
+	 */
+	public function iAmOnTheDashboard()
+	{
+		$this->dashboard->iAmOnDashboard();
+	}
+
+	/**
+	 * @Then I go to the menu Settings
+	 */
+	public function iGoToTheMenuSettings()
+	{
+		$this->dashboard->iGoToMenuItem( 'Settings' );
+	}
+
 	/**
 	 * @Then I see a title named :arg1
 	 */

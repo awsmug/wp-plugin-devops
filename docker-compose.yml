@@ -17,3 +17,13 @@ services:
       - MYSQL_USER=root
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWORD=root
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=webserver
+      - PMA_DATABASE=wordpress
+      - PMA_USER=root
+      - PMA_ROOT_PASSWORD=root
+      - PMA_PASSWORD=root
