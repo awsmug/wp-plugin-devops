@@ -30,7 +30,7 @@ PHP_FPM_CONF="$NGINX_DIR/nginx/php-fpm.conf"
 
 # Start php-fpm.
 tpl "$BIN_DIR/php-fpm.tpl.conf" "$PHP_FPM_CONF"
-"$PHP_FPM_BIN" --fpm-config "$PHP_FPM_CONF"
+"$PHP_FPM_BIN" --allow-to-run-as-root --fpm-config "$PHP_FPM_CONF"
 
 # Build the default nginx config files.
 tpl "$BIN_DIR/nginx.tpl.conf" "$NGINX_DIR/nginx/nginx.conf"

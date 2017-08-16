@@ -41,6 +41,7 @@ RUN apk update \
 RUN rm -rf /var/cache/apk/*
 
 ENV TERM="xterm" \
+    PHP_VERSION="7.0" \
     PHP_FPM_BIN="/usr/sbin/php-fpm7" \
     CURRENT_DIR=$(pwd) \
     PROJECT_DIR=$(pwd) \
@@ -66,7 +67,7 @@ ADD bin/init-selenium.sh $BIN_DIR/nit-wordpress.sh
 
 ADD bin/default-site.tpl.conf $BIN_DIR/default-site.tpl.conf
 ADD bin/fastcgi.tpl.conf $BIN_DIR/fastcgi.tpl.conf
-ADD bin/nginx.tpl.conf $BIN_DIR/tpl-conf/nginx.tpl.conf
+ADD bin/nginx.tpl.conf $BIN_DIR/nginx.tpl.conf
 ADD bin/php-fpm.tpl.conf $BIN_DIR/php-fpm.tpl.conf
 
 RUN $BIN_DIR/init-nginx.sh
