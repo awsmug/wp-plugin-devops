@@ -41,6 +41,7 @@ RUN apk update \
 RUN rm -rf /var/cache/apk/*
 
 ENV TERM="xterm" \
+    PHP_FPM_BIN = "/usr/sbin/php-fpm7" \
     CURRENT_DIR=$(pwd) \
     PROJECT_DIR=$(pwd) \
     BIN_DIR=$PROJECT_DIR/bin/ \
@@ -58,6 +59,17 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/bin/wp && chown nginx:nginx /usr/bin/wp
 
 RUN mkdir -p /run/nginx
+
+ADD bin/init-nginx.sh $BIN_DIR/init-nginx.sh
+ADD bin/init-selenium.sh $BIN_DIR/init-selenium.sh
+ADD bin/init-selenium.sh $BIN_DIR/nit-wordpress.sh
+
+ADD bin/default-site.tpl.conf $BIN_DIR/default-site.tpl.conf
+ADD bin/fastcgi.tpl.conf $BIN_DIR/fastcgi.tpl.conf
+ADD bin/nginx.tpl.conf $BIN_DIR/tpl-conf/nginx.tpl.conf
+ADD bin/php-fpm.tpl.conf $BIN_DIR/php-fpm.tpl.conf
+
+RUN $BIN_DIR/init-nginx.sh
 
 EXPOSE 80
 # ADD files/nginx.conf /etc/nginx/

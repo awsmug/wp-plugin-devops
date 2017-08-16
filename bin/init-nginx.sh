@@ -25,7 +25,7 @@ function tpl {
 mkdir -p "$NGINX_DIR/nginx/sites-enabled"
 
 # Configure the PHP handler.
-PHP_FPM_BIN="$HOME/.phpenv/versions/$PHP_VERSION/sbin/php-fpm"
+
 PHP_FPM_CONF="$NGINX_DIR/nginx/php-fpm.conf"
 
 # Start php-fpm.
