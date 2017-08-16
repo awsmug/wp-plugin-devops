@@ -22,6 +22,7 @@ before_install:
   - composer validate
   - phpenv config-rm xdebug.ini
 
+  - export PHP_VERSION=$(phpenv version-name)
   - export PHP_FPM_BIN="$HOME/.phpenv/versions/$PHP_VERSION/sbin/php-fpm"
   - export CURRENT_DIR=$(pwd)
   - export PROJECT_DIR=$CURRENT_DIR

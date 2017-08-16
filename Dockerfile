@@ -41,7 +41,7 @@ RUN apk update \
 RUN rm -rf /var/cache/apk/*
 
 ENV TERM="xterm" \
-    PHP_FPM_BIN = "/usr/sbin/php-fpm7" \
+    PHP_FPM_BIN="/usr/sbin/php-fpm7" \
     CURRENT_DIR=$(pwd) \
     PROJECT_DIR=$(pwd) \
     BIN_DIR=$PROJECT_DIR/bin/ \
@@ -70,6 +70,8 @@ ADD bin/nginx.tpl.conf $BIN_DIR/tpl-conf/nginx.tpl.conf
 ADD bin/php-fpm.tpl.conf $BIN_DIR/php-fpm.tpl.conf
 
 RUN $BIN_DIR/init-nginx.sh
+RUN $BIN_DIR/init-selenium.sh
+RUN $BIN_DIR/init-wordpress.sh
 
 EXPOSE 80
 # ADD files/nginx.conf /etc/nginx/
