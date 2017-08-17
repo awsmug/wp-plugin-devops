@@ -30,13 +30,19 @@ RUN apk update \
     php7-mbstring \
     php7-dom \
     php7-xmlreader \
+    mysql \
     mysql-client \
+    pwgen \
     openssh-client \
     git \
     curl \
     rsync \
     musl \
+    openjdk7-jre \
     && apk --update --no-cache add tar
+
+
+RUN apk --update add mysql mysql-client pwgen && rm -f /var/cache/apk/*
 
 RUN rm -rf /var/cache/apk/*
 
@@ -53,7 +59,7 @@ ENV TERM="xterm" \
     DB_NAME="wordpress" \
     DB_USER="root"\
     DB_PASS="root"\
-    WP_DIR="/tmp/wordpress/" \
+    WP_DIR="/tmp/wordpress" \
     PLUGIN_DIR=$PROJECT_DIR
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
@@ -61,19 +67,14 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 
 RUN mkdir -p /run/nginx
 
-ADD bin/init-nginx.sh $BIN_DIR/init-nginx.sh
-ADD bin/init-selenium.sh $BIN_DIR/init-selenium.sh
-ADD bin/init-selenium.sh $BIN_DIR/nit-wordpress.sh
-
-ADD bin/default-site.tpl.conf $BIN_DIR/default-site.tpl.conf
-ADD bin/fastcgi.tpl.conf $BIN_DIR/fastcgi.tpl.conf
-ADD bin/nginx.tpl.conf $BIN_DIR/nginx.tpl.conf
-ADD bin/php-fpm.tpl.conf $BIN_DIR/php-fpm.tpl.conf
+ADD bin/* $BIN_DIR
 
 RUN $BIN_DIR/init-nginx.sh
+RUN $BIN_DIR/init-mysql.sh
 RUN $BIN_DIR/init-selenium.sh
-RUN $BIN_DIR/init-wordpress.sh
+RUN $BIN_DIR/init-wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST 4.8.1 $WP_DIR
 
 EXPOSE 80
+EXPOSE 3306
 # ADD files/nginx.conf /etc/nginx/
 # ADD files/php-fpm.conf /etc/php7/
