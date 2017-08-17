@@ -5,7 +5,7 @@
 set -ex
 
 if [ $# -lt 3 ]; then
-  echo "usage: $0 <db-name> <db-user> <db-pass> [db-host] [wp-version] [wp-dir]"
+  echo "usage: $0 <db-name> <db-user> <db-pass> <db-host> <wp-version> <wp-dir>"
   exit 1
 fi
 
@@ -26,4 +26,4 @@ wp core config --path=$WP_DIR --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_P
 
 # Install.
 wp db create --path=$WP_DIR
-wp core install --path=$WP_DIR --url="wordpress.dev:8080" --title="wordpress.dev" --admin_user="admin" --admin_password="password" --admin_email="admin@wp.dev"
+wp core install --path=$WP_DIR --url="wordpress" --title="wordpress" --admin_user="admin" --admin_password="admin" --admin_email="admin@wp.dev"

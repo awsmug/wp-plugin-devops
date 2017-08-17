@@ -1,0 +1,10 @@
+.DS_Store
+.git
+.gitignore
+.idea
+.travis.yml
+bin
+log
+project.cfg
+project.sh
+wordpress

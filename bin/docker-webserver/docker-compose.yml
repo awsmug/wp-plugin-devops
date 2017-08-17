@@ -10,6 +10,7 @@ services:
     volumes:
       - ../../wordpress:/var/www/html/wp-content
       - ../../log:/var/log
+      - ../../tests:/tests
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_PASSWORD: p4ssw0rd!

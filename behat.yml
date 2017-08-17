@@ -11,7 +11,7 @@ default:
 
   extensions:
     Behat\MinkExtension:
-      base_url: http://wordpress.dev:8080
+      base_url: http://wordpress
       default_session: default
       javascript_session: selenium2
       sessions:
@@ -23,8 +23,8 @@ default:
           selenium2: ~
 
     PaulGibbs\WordpressBehatExtension:
-      path: /tmp/wordpress/
+      path: /var/www/html
       users:
         admin:
           username: admin
-          password: password
+          password: admin
