@@ -34,7 +34,7 @@ before_install:
   - export DB_USER="root"
   - export DB_PASS="root"
   - export DB_HOST="localhost"
-  - export WP_DIR="/var/www/html/"
+  - export WP_DIR="/tmp/wordpress/"
   - export PLUGIN_DIR=$PROJECT_DIR
   - export PLUGIN_SLUG=$(basename $PROJECT_DIR)
 
