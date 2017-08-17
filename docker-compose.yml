@@ -1,6 +1,59 @@
-version: "3"
+version: '3.1'
 services:
-  webserver:
+  wordpress:
+    depends_on:
+      - db
     build: .
+    restart: always
+    volumes:
+      - ./wordpress:/var/www/html/wp-content
+      - ./log:/var/log
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: p4ssw0rd!
+      XDEBUG_CONFIG: remote_host=192.168.1.36
     ports:
-      - "80:80"
+      - 80:80
+      - 443:443
+    networks:
+      - back
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+       - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: p4ssw0rd!
+    networks:
+      - back
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: p4ssw0rd!
+    networks:
+      - back
+  behat:
+      hostname: behat
+      image: docksal/behat
+      volumes:
+        - .:/src
+      # Run a built-in web server for access to HTML reports
+      ports:
+        - 8081:8000
+      entrypoint: "php -S 0.0.0.0:8000"
+
+  browser:
+      hostname: browser
+      image: selenium/standalone-chrome
+      networks:
+        - back
+networks:
+  back:
+volumes:
+  db_data:

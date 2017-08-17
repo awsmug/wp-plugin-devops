@@ -1,0 +1,21 @@
+#!/bin/sh
+
+SCRIPT_PATH=$(dirname $0)
+
+if [ "$1" = "start" ]; then
+    $SCRIPT_PATH/docker-webserver/start.sh
+    echo "Webserver started"
+
+elif [ "$1" = "stop" ]; then
+    $SCRIPT_PATH/docker-webserver/stop.sh
+    echo "Webserver stopped"
+
+elif [ "$1" = "clean" ]; then
+    $SCRIPT_PATH/docker-webserver/clean.sh
+    echo "Local files cleaned up"
+
+else
+    echo "Usage: $(basename $0) <start|stop|clean>"
+    exit 1
+
+fi
