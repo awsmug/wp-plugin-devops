@@ -10,7 +10,7 @@ addons:
     packages:
       - nginx
   hosts:
-    - wordpress.dev
+    - wordpress
 
 matrix:
   include:
