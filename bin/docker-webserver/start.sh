@@ -2,6 +2,8 @@
 
 echo "Starting development environment..."
 
-docker-compose up -d
+docker-compose -f $DOCKER_COMPOSE_FILE up -d
 
 $BIN_PATH/init.sh
+
+echo "Finished starting webserver!"

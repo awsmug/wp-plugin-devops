@@ -1,13 +1,15 @@
 version: '3.1'
 services:
   wordpress:
+    container_name:
+      docker_wpplugin_wordpress
     depends_on:
       - db
     build: .
     restart: always
     volumes:
-      - ./wordpress:/var/www/html/wp-content
-      - ./log:/var/log
+      - ../../wordpress:/var/www/html/wp-content
+      - ../../:/var/log
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_PASSWORD: p4ssw0rd!
@@ -18,6 +20,8 @@ services:
     networks:
       - back
   db:
+    container_name:
+        docker_wpplugin_db
     image: mysql:5.7
     restart: always
     volumes:
@@ -27,6 +31,8 @@ services:
     networks:
       - back
   phpmyadmin:
+    container_name:
+          docker_wpplugin_phpmyadmin
     depends_on:
       - db
     image: phpmyadmin/phpmyadmin
@@ -39,6 +45,8 @@ services:
     networks:
       - back
   behat:
+      container_name:
+        docker_wpplugin_behat
       hostname: behat
       image: docksal/behat
       volumes:
@@ -49,6 +57,8 @@ services:
       entrypoint: "php -S 0.0.0.0:8000"
 
   browser:
+      container_name:
+        docker_wpplugin_browser
       hostname: browser
       image: selenium/standalone-chrome
       networks:

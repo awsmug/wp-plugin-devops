@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Try to initialize project..." >&2
-#sleep 10
+
 
 # Only initialize if not initialzed before
 if [ -d "${PLUGIN_PATH}/logs" ]; then
@@ -18,10 +18,10 @@ else
     exit 1
 fi
 
-#Installing WordPress
-WP_CONTAINER_NAME="${CONTAINER_PREFIX}_wordpress_1"
-
 echo "Container: $WP_CONTAINER_NAME"
+
+echo "Waiting for Server..."
+sleep 10
 
 echo "Installing WordPress..."
 docker exec ${WP_CONTAINER_NAME} wp core install --url=localhost --title=WPPlugin --admin_user=admin --admin_password=admin --admin_email=info@example.com --allow-root

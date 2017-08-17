@@ -1,5 +1,7 @@
 #!/bin/sh
 
-docker-compose down
+echo "Stopping webserver"
 
-echo "Stopped develop environment..."
+docker-compose -f "${BIN_PATH}/docker-compose.yml" down
+
+echo "Finished stopping webserver!"

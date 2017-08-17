@@ -1,18 +1,19 @@
 #!/bin/sh
 
-SCRIPT_PATH=$(dirname $0)
+export SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
+export BIN_PATH="${SCRIPT_PATH}/docker-webserver"
 
 if [ "$1" = "all" ]; then
-    $SCRIPT_PATH/docker-webserver/phpunit-tests.sh
-    $SCRIPT_PATH/docker-webserver/behat-tests.sh
+    $BIN_PATH/phpunit-tests.sh
+    $BIN_PATH/behat-tests.sh
     echo "Starting all tests"
 
 elif [ "$1" = "phpunit" ]; then
-    $SCRIPT_PATH/docker-webserver/phpunit-tests.sh
+    $BIN_PATH/phpunit-tests.sh
     echo "Starting PHP Unit Tests"
 
 elif [ "$1" = "behat" ]; then
-     $SCRIPT_PATH/docker-webserver/behat-tests.sh
+    $BIN_PATH/behat-tests.sh
     echo "Starting Behat Tests"
 
 else

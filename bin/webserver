@@ -1,22 +1,23 @@
 #!/bin/sh
 
-export SCRIPT_PATH=$(dirname $0)
+export SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
+export BIN_PATH="${SCRIPT_PATH}/docker-webserver"
+
+export CONTAINER_PREFIX="docker_wpplugin_"
+export DOCKER_COMPOSE_FILE="${BIN_PATH}/docker-compose.yml"
+export WP_CONTAINER_NAME="${CONTAINER_PREFIX}wordpress"
+
 export PLUGIN_PATH=$(dirname $SCRIPT_PATH)
 export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
-export BIN_PATH=$(basename $SCRIPT_PATH)/docker-webserver
-export CONTAINER_PREFIX=${PLUGIN_SLUG//[-._]/}
 
 if [ "$1" = "start" ]; then
-    $SCRIPT_PATH/docker-webserver/start.sh
-    echo "Webserver started"
+    $BIN_PATH/start.sh
 
 elif [ "$1" = "stop" ]; then
-    $SCRIPT_PATH/docker-webserver/stop.sh
-    echo "Webserver stopped"
+    $BIN_PATH/stop.sh
 
 elif [ "$1" = "clean" ]; then
-    $SCRIPT_PATH/docker-webserver/clean.sh
-    echo "Local files cleaned up"
+    $BIN_PATH/clean.sh
 
 else
     echo "Usage: $(basename $0) <start|stop|clean>"
