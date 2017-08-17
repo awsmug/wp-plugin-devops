@@ -1,6 +1,10 @@
 #!/bin/sh
 
-SCRIPT_PATH=$(dirname $0)
+export SCRIPT_PATH=$(dirname $0)
+export PLUGIN_PATH=$(dirname $SCRIPT_PATH)
+export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
+export BIN_PATH=$(basename $SCRIPT_PATH)/docker-webserver
+export CONTAINER_PREFIX=${PLUGIN_SLUG//[-._]/}
 
 if [ "$1" = "start" ]; then
     $SCRIPT_PATH/docker-webserver/start.sh
