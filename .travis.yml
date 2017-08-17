@@ -44,7 +44,7 @@ install:
 before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - if [[ "$BEHAT" == "1" ]]; then travis-wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION $WP_DIR; fi
-  - if [[ "$BEHAT" == "1" ]]; then travis--nginx.sh; fi
+  - if [[ "$BEHAT" == "1" ]]; then travis-nginx.sh; fi
   - if [[ "$BEHAT" == "1" ]]; then travis-selenium.sh; fi
   - cd ..
   - cp -r "$PLUGIN_SLUG" "$WP_DIR/wp-content/plugins/$PLUGIN_SLUG"
