@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "Try to initialize project..." >&2
+echo "Initializing project..." >&2
 
 
 # Only initialize if not initialzed before
