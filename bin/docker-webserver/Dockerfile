@@ -1,17 +1,15 @@
 FROM wordpress:latest
 MAINTAINER Awesome UG
 
+RUN mkdir /tmp/wordpress
+WORKDIR /tmp/wordpress
+
 # Add sudo in order to run wp-cli as the www-data user
 RUN apt-get update && apt-get install -y sudo less
 
 # Add WP-CLI
 RUN curl -o /bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x /bin/wp
-
-# Add PHP Zip Archive extension
-RUN apt-get install -y zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-install zip
 
 # Enable xDebug
 RUN yes | pecl install xdebug \
@@ -27,3 +25,4 @@ RUN yes | pecl install xdebug \
 # Cleanup
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+

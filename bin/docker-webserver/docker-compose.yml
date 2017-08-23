@@ -1,36 +1,50 @@
 version: '3.1'
 services:
-  wordpress:
-    container_name:
-      docker_wpplugin_wordpress
-    depends_on:
-      - db
-    build: .
-    restart: always
-    volumes:
-      - ../../wordpress:/var/www/html/wp-content
-      - ../../log:/var/log
-      - ../../tests:/tests
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_PASSWORD: p4ssw0rd!
-      XDEBUG_CONFIG: remote_host=192.168.1.36
+  web:
+    container_name: docker_wpplugin_web
+    image: nginx:latest
     ports:
       - 80:80
-      - 443:443
-    networks:
-      - back
+    volumes:
+      - wpdata:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - wordpress
+  php:
+      container_name: docker_wpplugin_php
+      image: mahype/phpbrew:1.0.0
+      ports:
+        - "9000:9000"
+      volumes:
+        - wpdata:/var/www/html
+  wordpress:
+    container_name: docker_wpplugin_wp
+    build:
+        context: ./wordpress
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DB: wordpress
+      MYSQL_USER: root
+      MYSQL_PASS: p4ssw0rd!
+      MYSQL_DB: wp_test
+      WP_VERSION: 4.8.1
+      WP_PLUGINS: woocommerce torro-forms
+      WP_LOCALE: de_DE
+      WP_USER: admin
+      WP_PASS: password
+      WP_URL: localhost
+      WP_TITLE: WordPress Test
+    volumes:
+      - wpdata:/var/www/html
+    depends_on:
+      - db
+      - php
   db:
-    container_name:
-        docker_wpplugin_db
+    container_name: docker_wpplugin_db
     image: mysql:5.7
     restart: always
-    volumes:
-       - db_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: p4ssw0rd!
-    networks:
-      - back
   phpmyadmin:
     container_name:
           docker_wpplugin_phpmyadmin
@@ -43,8 +57,6 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: p4ssw0rd!
-    networks:
-      - back
   behat:
       container_name:
         docker_wpplugin_behat
@@ -56,15 +68,10 @@ services:
       ports:
         - 8081:8000
       entrypoint: "php -S 0.0.0.0:8000"
-
   browser:
       container_name:
         docker_wpplugin_browser
       hostname: browser
       image: selenium/standalone-chrome
-      networks:
-        - back
-networks:
-  back:
 volumes:
-  db_data:
+  wpdata:
