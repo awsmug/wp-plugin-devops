@@ -8,8 +8,6 @@ services:
     volumes:
       - wpdata:/var/www/html
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    links:
-      - wordpress
   php:
       container_name: docker_wpplugin_php
       image: mahype/phpbrew:1.0.0
@@ -26,7 +24,6 @@ services:
       MYSQL_DB: wordpress
       MYSQL_USER: root
       MYSQL_PASS: p4ssw0rd!
-      MYSQL_DB: wp_test
       WP_VERSION: 4.8.1
       WP_PLUGINS: woocommerce torro-forms
       WP_LOCALE: de_DE
