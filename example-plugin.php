@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Test Travis
+Plugin Name: Example Plugin
 Plugin URI: https://awesome.ug
-Description: We test Travis
+Description: We are testing devops
 Version: 1.0
 Author: Sven Wagener
-Author URI: https://sven-wagener.com
+Author URI: https://awesome-ug
 Min WP Version: 4.6
 Max WP Version: 4.8.1
 */
