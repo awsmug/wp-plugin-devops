@@ -1,5 +1,28 @@
 version: '3.1'
 services:
+  wp:
+    container_name: docker_wpplugin_wp
+    build:
+        context: ./bin/docker/wordpress
+    environment:
+      MYSQL_HOST: db
+      MYSQL_DB: wp
+      MYSQL_USER: root
+      MYSQL_PASS: p4ssw0rd!
+      WP_VERSION: 4.6.6
+      WP_PLUGINS: woocommerce
+      WP_THEMES: twentysixteen
+      WP_ACTIVE_THEME: twentysixteen
+      WP_LOCALE: de_DE
+      WP_USER: admin
+      WP_PASS: password
+      WP_URL: localhost
+      WP_INSTALL: "fresh"
+    volumes:
+      - wpdata:/var/www/html
+    depends_on:
+      - db
+      - php
   web:
     container_name: docker_wpplugin_web
     image: nginx:latest
@@ -7,41 +30,23 @@ services:
       - 80:80
     volumes:
       - wpdata:/var/www/html
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./bin/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
   php:
       container_name: docker_wpplugin_php
-      image: mahype/phpbrew:1.0.0
+      image: mahype/phpbrew:latest
       ports:
         - "9000:9000"
       volumes:
         - wpdata:/var/www/html
-  wordpress:
-    container_name: docker_wpplugin_wp
-    build:
-        context: ./wordpress
-    environment:
-      MYSQL_HOST: db
-      MYSQL_DB: wordpress
-      MYSQL_USER: root
-      MYSQL_PASS: p4ssw0rd!
-      WP_VERSION: 4.8.1
-      WP_PLUGINS: woocommerce torro-forms
-      WP_LOCALE: de_DE
-      WP_USER: admin
-      WP_PASS: password
-      WP_URL: localhost
-      WP_TITLE: WordPress Test
-    volumes:
-      - wpdata:/var/www/html
-    depends_on:
-      - db
-      - php
+      environment:
+        PHP_VERSION: "5.6.30"
   db:
     container_name: docker_wpplugin_db
-    image: mysql:5.7
-    restart: always
+    image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: p4ssw0rd!
+    volumes:
+      - dbdata:/var/lib/mysql
   phpmyadmin:
     container_name:
           docker_wpplugin_phpmyadmin
@@ -72,3 +77,4 @@ services:
       image: selenium/standalone-chrome
 volumes:
   wpdata:
+  dbdata:

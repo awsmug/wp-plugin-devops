@@ -19,12 +19,15 @@ if echo "$ANSWER" | grep -iq "^y" ;then
     fi
 
     # Stopping docker and cleaning files up
-    docker-compose -f "${BIN_PATH}/docker-compose.yml" down
+    docker-compose -f "${PLUGIN_PATH}/docker-compose.yml" down
+    docker rm $(docker ps -a -q)
     docker rmi -f $(docker images | grep dockerwebserver_ | tr -s ' ' | cut -d ' ' -f 3)
 
     # Removing directories
     rm -rf "${PLUGIN_PATH}/wordpress"
     rm -rf "${PLUGIN_PATH}/log"
+
+
 
     echo "Cleaned up project!"
 
