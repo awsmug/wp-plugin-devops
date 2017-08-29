@@ -45,6 +45,8 @@ services:
       MYSQL_ROOT_PASSWORD: p4ssw0rd!
     volumes:
       - dbdata:/var/lib/mysql
+    ports:
+      - 3306:3306
   phpmyadmin:
     container_name:
           docker_wpplugin_phpmyadmin

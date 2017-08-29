@@ -1,45 +1,17 @@
 #!/bin/sh
 
 if [ -z "$1" ]; then
-        echo "Missing container suffix!";
-        exit 1;
+    echo "Missing Host!";
+    exit 1;
 fi
 
-function db {
-    while ! mysqladmin ping -h"$DB_HOST" --silent; do
-        sleep 1
-    done
-}
+if [ -z "$2" ]; then
+    echo "Missing Port!";
+    exit 1;
+fi
 
-function container_started {
-    if [ -z "$1" ]; then
-        echo "Missing container suffix!";
-        exit 1;
-    fi
-
-    DOCKER_CONTAINER_NAME=${CONTAINER_PREFIX}$1
-    DOCKER_WPPLUGIN_WP_ID=$(docker ps -aqf name=${DOCKER_CONTAINER_NAME})
-    DOCKER_WPPLUGIN_WP_STATE=$(docker inspect -f {{.State.Running}} ${DOCKER_WPPLUGIN_WP_ID})
-
-    echo $DOCKER_WPPLUGIN_WP_STATE
-}
-
-function waitfor {
-    if [ -z "$1" ]; then
-        echo "Missing container suffix!";
-        exit 1;
-    fi
-
-    echo "Waiting for ${1}..."
-
-    while [ "true" != $(container_started ${1}) ]; do
-        echo "Status: $(container_started ${1})"
-        sleep 1
-    done
-}
-
-DOCKER_CONTAINER_NAME=${CONTAINER_PREFIX}$1
-DOCKER_WPPLUGIN_WP_ID=$(docker ps -aqf name=${DOCKER_CONTAINER_NAME})
-docker inspect ${DOCKER_WPPLUGIN_WP_ID}
-
-waitfor $1
+PORT=$2
+while echo | telnet $1 $PORT 2>&1 | grep -qe 'Connection refused'; do
+    echo "Connection refused on port $PORT. Waiting 1 seconds..."
+    sleep 1
+done

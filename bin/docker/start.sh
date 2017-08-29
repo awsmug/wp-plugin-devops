@@ -6,15 +6,11 @@ docker-compose -f ${DOCKER_COMPOSE_FILE} up -d
 
 echo "Initializing project..." >&2
 
-echo "Container: ${WP_CONTAINER_NAME}"
+echo "Waiting for Database..."
+${BIN_PATH}/waitfor localhost 3306 # Does not take effect right now
 
-${BIN_PATH}/waitfor web
-${BIN_PATH}/waitfor db
-${BIN_PATH}/waitfor wp
-${BIN_PATH}/waitfor phpmyadmin
-${BIN_PATH}/waitfor behat
-
-sleep 60
+echo "Database ready."
+sleep 90
 
 REMOTE_PLUGIN_PATH=${PLUGIN_PATH}/wordpress/wp-content/plugins/
 docker exec ${WP_CONTAINER_NAME} mkdir -p ${REMOTE_PLUGIN_PATH}
