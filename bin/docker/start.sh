@@ -2,14 +2,19 @@
 
 echo "Starting development environment..."
 
-docker-compose -f $DOCKER_COMPOSE_FILE up -d
+docker-compose -f ${DOCKER_COMPOSE_FILE} up -d
 
 echo "Initializing project..." >&2
 
-echo "Container: $WP_CONTAINER_NAME"
+echo "Container: ${WP_CONTAINER_NAME}"
 
-echo "Waiting for Server..."
-sleep 20
+${BIN_PATH}/waitfor web
+${BIN_PATH}/waitfor db
+${BIN_PATH}/waitfor wp
+${BIN_PATH}/waitfor phpmyadmin
+${BIN_PATH}/waitfor behat
+
+sleep 60
 
 REMOTE_PLUGIN_PATH=${PLUGIN_PATH}/wordpress/wp-content/plugins/
 docker exec ${WP_CONTAINER_NAME} mkdir -p ${REMOTE_PLUGIN_PATH}
