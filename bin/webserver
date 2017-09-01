@@ -1,16 +1,19 @@
 #!/bin/sh
 
-##
 # Getting path of this script - https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself
-##
 pushd `dirname $0` > /dev/null
 export SCRIPT_PATH=`pwd -P`
 popd > /dev/null
 
 export BIN_PATH="${SCRIPT_PATH}/docker"
 
-export CONTAINER_PREFIX="docker_wpplugin_"
-export WP_CONTAINER_NAME="${CONTAINER_PREFIX}wp"
+CONTAINER_PREFIX=$(basename $(dirname ${SCRIPT_PATH}))
+CONTAINER_PREFIX=${CONTAINER_PREFIX// /}
+CONTAINER_PREFIX=${CONTAINER_PREFIX//-/}_
+
+export CONTAINER_PREFIX
+
+export WP_CONTAINER_NAME="${CONTAINER_PREFIX}wp_1"
 
 export PLUGIN_PATH=$(dirname $SCRIPT_PATH)
 export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
