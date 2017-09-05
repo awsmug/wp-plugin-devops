@@ -24,7 +24,7 @@ function add_to_gitignore {
     echo "# Automatinc added files from WP Plugin Devops" >> $1
     echo "###" >> $1
     echo "composer.lock" >> $1
-    echo "tests" >> $1
+    echo "test" >> $1
     echo "webserver" >> $1
     echo "vendor" >> $1
     echo "wordpress" >> $1
