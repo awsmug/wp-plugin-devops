@@ -34,7 +34,7 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
             echo "webserver" >> $GITIGNORE_FILE
             echo "vendor" >> $GITIGNORE_FILE
             echo "wordpress" >> $GITIGNORE_FILE
-        elif [ "n" $add_gitignore ]; then
+        elif [ "n" = $add_gitignore ]; then
             echo "No files added to .gitignore."
         else
             echo "Please answer with (y) or (n). Installation interrupted."
