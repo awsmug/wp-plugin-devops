@@ -3,6 +3,9 @@
 .gitignore
 .idea
 .travis.yml
+composer.json
+composer.lock
+docker-compose.yml
 bin
 log
 project.cfg
