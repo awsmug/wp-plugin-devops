@@ -58,7 +58,7 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     read -p "This seems to be the first start of the WP Plugin Devops in this directory. Create a main plugin file (y/n)? " add_plugin_file
 
     if [ "y" = $add_plugin_file ]; then
-        cp ${DEVOPS_PATH}/example-plugin.php ${PLUGIN_PATH}/plugin.php
+        cp ${DEVOPS_PATH}/plugin.php ${PLUGIN_PATH}/plugin.php
         echo "plugin.php added."
     elif [ "n" = $add_plugin_file ]; then
         echo "No Plugin file added."
