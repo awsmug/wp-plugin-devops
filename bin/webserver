@@ -88,7 +88,7 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     fi
 
     echo "Copy Docker compose file..."
-    #cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
+    cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
 fi
 
 if [ "$1" = "start" ]; then
