@@ -9,7 +9,7 @@ export BIN_PATH="`( cd \"$VENDOR_BIN_DIR\" && cd \"$RELATIVE_LINK_DIR\" && pwd )
 export DEVOPS_PATH=$(dirname $(dirname $BIN_PATH))
 
 # Setting up docker variables
-CONTAINER_PREFIX=$(basename $(dirname ${SCRIPT_PATH}))
+CONTAINER_PREFIX=$(basename ${SCRIPT_PATH})
 CONTAINER_PREFIX=${CONTAINER_PREFIX// /}
 export CONTAINER_PREFIX=${CONTAINER_PREFIX//-/}_
 export WP_CONTAINER_NAME="${CONTAINER_PREFIX}wp_1"
@@ -22,7 +22,7 @@ export DOCKER_COMPOSE_FILE="${PLUGIN_PATH}/docker-compose.yml"
 # Copy Docker Compose file to plugin dir if not existing
 if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
-fiw
+fi
 
 if [ "$1" = "start" ]; then
     $BIN_PATH/start.sh
