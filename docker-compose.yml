@@ -8,7 +8,6 @@ services:
       MYSQL_USER: root
       MYSQL_PASS: p4ssw0rd!
       WP_VERSION: 4.8.1
-      WP_PLUGINS: woocommerce wordpress-importer
       WP_LOCALE: de_DE
       WP_USER: admin
       WP_PASS: password
