@@ -1,23 +1,28 @@
 #!/bin/sh
 
-# Getting path of this script - https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself
-pushd `dirname $0` > /dev/null
-export SCRIPT_PATH=`pwd -P`
-popd > /dev/null
+# Setting up directory variables
+export SCRIPT_PATH=$(pwd)
+RELATIVE_LINK_DIR="$(dirname "$(readlink "$0")")"
+VENDOR_BIN_DIR="`dirname \"$0\"`"              # relative
+VENDOR_BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && pwd )`"  # absolutized and normalized
+export BIN_PATH="`( cd \"$VENDOR_BIN_DIR\" && cd \"$RELATIVE_LINK_DIR\" && pwd )`/docker"
+export DEVOPS_PATH=$(dirname $(dirname $BIN_PATH))
 
-export BIN_PATH="${SCRIPT_PATH}/docker"
-
+# Setting up docker variables
 CONTAINER_PREFIX=$(basename $(dirname ${SCRIPT_PATH}))
 CONTAINER_PREFIX=${CONTAINER_PREFIX// /}
-CONTAINER_PREFIX=${CONTAINER_PREFIX//-/}_
-
-export CONTAINER_PREFIX
-
+export CONTAINER_PREFIX=${CONTAINER_PREFIX//-/}_
 export WP_CONTAINER_NAME="${CONTAINER_PREFIX}wp_1"
 
-export PLUGIN_PATH=$(dirname $SCRIPT_PATH)
+# Setting up WP variables
+export PLUGIN_PATH=$SCRIPT_PATH
 export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
 export DOCKER_COMPOSE_FILE="${PLUGIN_PATH}/docker-compose.yml"
+
+# Copy Docker Compose file to plugin dir if not existing
+if [ ! -f $DOCKER_COMPOSE_FILE ]; then
+    cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
+fi
 
 if [ "$1" = "start" ]; then
     $BIN_PATH/start.sh
