@@ -72,11 +72,13 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
 
     read -p "This seems to be the first start of the WP Plugin Devops in this directory. Create a test files for phpunit and behat? (y/n) " add_test_files
 
-    if [ -z ${PLUGIN_PATH}/tests ]; then
+    TEST_PATH=${PLUGIN_PATH}/tests
+
+    if [ ! -d $TEST_PATH ]; then
         if [ "y" = $add_test_files ]; then
-            mkdir ${PLUGIN_PATH}/tests
-            cp -R ${DEVOPS_PATH}/tests/. ${PLUGIN_PATH}/tests
-            echo "test files added."
+            mkdir -p $TEST_PATH
+            cp -R ${DEVOPS_PATH}/tests/. $TEST_PATH
+            echo "Test files added."
         elif [ "n" = $add_test_files ]; then
             echo "No test files added."
         else
@@ -86,12 +88,7 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     fi
 
     echo "Copy Docker compose file..."
-    cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
-fi
-
-# Copy Docker Compose file to plugin dir if not existing
-if [ ! -f $DOCKER_COMPOSE_FILE ]; then
-    cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
+    #cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
 fi
 
 if [ "$1" = "start" ]; then
