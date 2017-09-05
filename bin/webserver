@@ -21,6 +21,30 @@ export DOCKER_COMPOSE_FILE="${PLUGIN_PATH}/docker-compose.yml"
 
 # Copy Docker Compose file to plugin dir if not existing
 if [ ! -f $DOCKER_COMPOSE_FILE ]; then
+    #cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
+
+    GITIGNORE_FILE="${PLUGIN_PATH}/.gitignore"
+
+    if [ -f $GITIGNORE_FILE ]; then
+        read -p ".gitignore file exists would you like to add not necessary files to it (y/n): " add_gitignore
+        if [ "y" = $add_gitignore ]; then
+            echo "composer.lock" >> $GITIGNORE_FILE
+            echo "tests" >> $GITIGNORE_FILE
+            echo "webserver" >> $GITIGNORE_FILE
+            echo "vendor" >> $GITIGNORE_FILE
+            echo "wordpress" >> $GITIGNORE_FILE
+        elif [ "n" $add_gitignore ]; then
+            echo "No files added to .gitignore."
+        else
+            echo "Please answer with (y) or (n). Installation interrupted."
+            exit 1;
+        fi
+    fi
+fi
+exit;
+
+# Copy Docker Compose file to plugin dir if not existing
+if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
 fi
 
