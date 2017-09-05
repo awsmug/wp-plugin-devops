@@ -1,7 +1,7 @@
 {
-    "name": "awsmug/wp-test-suite",
-    "type": "wordpress-plugin",
-    "description": "WordPtess test suite",
+    "name": "awsmug/wp-plugin-devops",
+    "type": "dev",
+    "description": "WordPress Plugin Devops for developing WordPress Plugins",
     "license": "GPL-3.0",
     "authors": [
         {
