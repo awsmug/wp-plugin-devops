@@ -22,7 +22,7 @@ export DOCKER_COMPOSE_FILE="${PLUGIN_PATH}/docker-compose.yml"
 # Copy Docker Compose file to plugin dir if not existing
 if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
-fi
+fiw
 
 if [ "$1" = "start" ]; then
     $BIN_PATH/start.sh
