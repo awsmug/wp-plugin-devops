@@ -2,28 +2,34 @@
 
 ## Setting everything up
 
-Clone this repository. And put or merge all files to your WordPress plugin.
+### Requirements
+
+For this library [Composer](https://getcomposer.org/download/) and [Docker](https://www.docker.com/) is required. Please install before starting.
+
+### Install
+
+Add WP Plugin Devops functionality by using Composer. 
 
 ```bash
-git clone git@github.com:awsmug/wp-plugin-devops.git
+composer require awsmug/wp-plugin-devops:dev-master
 ```
 
 Start the local server.
 
 ```bash
-bin/webserver start
+vendor/bin/webserver start
 ```
 
 Stop the local server.
 
 ```bash
-bin/webserver stop
+vendor/bin/webserver stop
 ```
 
 Clean up all local produced scripts.
 
 ```bash
-bin/webserver clean
+vendor/bin/webserver clean
 ```
 
 ## Local Development
