@@ -12,3 +12,5 @@ project.cfg
 project.sh
 wordpress
 vendor
+tests
+webserver
