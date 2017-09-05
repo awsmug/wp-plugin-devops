@@ -20,6 +20,9 @@ export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
 export DOCKER_COMPOSE_FILE="${PLUGIN_PATH}/docker-compose.yml"
 
 function add_to_gitignore {
+    echo "###" >> $1
+    echo "# Automatinc added files from WP Plugin Devops" >> $1
+    echo "###" >> $1
     echo "composer.lock" >> $1
     echo "tests" >> $1
     echo "webserver" >> $1
