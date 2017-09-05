@@ -34,6 +34,8 @@ function add_to_gitignore {
 if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     GITIGNORE_FILE="${PLUGIN_PATH}/.gitignore"
 
+    echo "This seems to be the first start of the WP Plugin Devops in this directory. We will ask you some further questions."
+
     if [ -f $GITIGNORE_FILE ]; then
         read -p ".gitignore file exists would you like to add not necessary files to it (y/n): " add_gitignore
 
@@ -58,7 +60,7 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
         fi
     fi
 
-    read -p "This seems to be the first start of the WP Plugin Devops in this directory. Create a main plugin file? (y/n) " add_plugin_file
+    read -p "Create a main plugin file? (y/n) " add_plugin_file
 
     if [ "y" = $add_plugin_file ]; then
         cp ${DEVOPS_PATH}/plugin.php ${PLUGIN_PATH}/plugin.php
@@ -70,16 +72,32 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
         exit 1;
     fi
 
-    read -p "This seems to be the first start of the WP Plugin Devops in this directory. Create a test files for phpunit and behat? (y/n) " add_test_files
-
     TEST_PATH=${PLUGIN_PATH}/tests
 
     if [ ! -d $TEST_PATH ]; then
+        read -p "Create a test files for phpunit and behat? (y/n) " add_test_files
+
         if [ "y" = $add_test_files ]; then
             mkdir -p $TEST_PATH
             cp -R ${DEVOPS_PATH}/tests/. $TEST_PATH
             echo "Test files added."
         elif [ "n" = $add_test_files ]; then
+            echo "No test files added."
+        else
+            echo "Please answer with (y) or (n). Installation interrupted."
+            exit 1;
+        fi
+    fi
+
+    TRAVIS_FILE=${PLUGIN_PATH}/.travis.yml
+
+    if [ ! -d $TRAVIS_FILE ]; then
+        read -p "Create a travis file? (y/n) " add_travis_files
+
+        if [ "y" = $add_travis_files ]; then
+            cp -R ${DEVOPS_PATH}/.travis.yml ${PLUGIN_PATH}/.travis.yml
+            echo "Test files added."
+        elif [ "n" = $add_travis_files ]; then
             echo "No test files added."
         else
             echo "Please answer with (y) or (n). Installation interrupted."
