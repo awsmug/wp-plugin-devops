@@ -23,8 +23,8 @@ default:
           selenium2: ~
 
     PaulGibbs\WordpressBehatExtension:
-      path: /tmp/wordpress/
+      path: ./wordpress
       users:
         admin:
           username: admin
-          password: admin
+          password: password
