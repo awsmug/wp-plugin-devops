@@ -53,7 +53,7 @@ services:
       MYSQL_ROOT_PASSWORD: p4ssw0rd!
   behat:
       hostname: behat
-      image: docksal/behat
+      image: mahype/wordhat:latest
       volumes:
         - .:/src
       # Run a built-in web server for access to HTML reports
