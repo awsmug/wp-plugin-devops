@@ -34,7 +34,7 @@ function add_to_gitignore {
 if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     GITIGNORE_FILE="${PLUGIN_PATH}/.gitignore"
 
-    echo "This seems to be the first start of the WP Plugin Devops in this directory. We will ask you some further questions."
+    echo "This seems to be the first start of the WP Plugin Devops in this directory."
 
     if [ -f $GITIGNORE_FILE ]; then
         read -p ".gitignore file exists would you like to add not necessary files to it (y/n): " add_gitignore
@@ -75,11 +75,24 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     TEST_PATH=${PLUGIN_PATH}/tests
 
     if [ ! -d $TEST_PATH ]; then
-        read -p "Create a test files for phpunit and behat? (y/n) " add_test_files
+        read -p "Create test files for phpunit? (y/n) " add_test_files
 
         if [ "y" = $add_test_files ]; then
             mkdir -p $TEST_PATH
-            cp -R ${DEVOPS_PATH}/tests/. $TEST_PATH
+            cp -R ${DEVOPS_PATH}/tests/phpunit/. $TEST_PATH/phpunit/
+            echo "Test files added."
+        elif [ "n" = $add_test_files ]; then
+            echo "No test files added."
+        else
+            echo "Please answer with (y) or (n). Installation interrupted."
+            exit 1;
+        fi
+
+        read -p "Create test files for behat? (y/n) " add_test_files
+
+        if [ "y" = $add_test_files ]; then
+            mkdir -p $TEST_PATH
+            cp -R ${DEVOPS_PATH}/tests/behat/. $TEST_PATH/behat/
             echo "Test files added."
         elif [ "n" = $add_test_files ]; then
             echo "No test files added."
