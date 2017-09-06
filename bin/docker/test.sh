@@ -1,8 +1,5 @@
 #!/bin/sh
 
-export SCRIPT_PATH=$(dirname ${BASH_SOURCE[0]})
-export BIN_PATH="${SCRIPT_PATH}/docker-webserver"
-
 if [ "$1" = "all" ]; then
     $BIN_PATH/phpunit-tests.sh
     $BIN_PATH/behat-tests.sh
@@ -17,6 +14,6 @@ elif [ "$1" = "behat" ]; then
     echo "Starting Behat Tests"
 
 else
-    echo "Usage: $(basename $0) <all|behat|phpunit>"
+    echo "Usage: wpdevops test <all|behat|phpunit>"
     exit 1
 fi
