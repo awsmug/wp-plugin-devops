@@ -17,32 +17,26 @@ composer require awsmug/wp-plugin-devops:dev-master
 Start the local server.
 
 ```bash
-vendor/bin/webserver start
+vendor/bin/wpdevops start
 ```
 
 Stop the local server.
 
 ```bash
-vendor/bin/webserver stop
+vendor/bin/wpdevops stop
 ```
 
-Clean up all local produced scripts.
+Clean up all automatic produced scripts.
 
 ```bash
-vendor/bin/webserver clean
+vendor/bin/wpdevops clean
 ```
 
 ## Local Development
 
 ### Docker container for development
 
-Starting docker containers manual:
-
-```bash
-docker-compose up
-```
-
-The docker environment contains.
+The docker on which the environment is based contains.
 
 * Nginx webserver
 * WordPress
