@@ -75,12 +75,13 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     TEST_PATH=${PLUGIN_PATH}/tests
 
     if [ ! -d $TEST_PATH ]; then
-        read -p "Create test files for phpunit? (y/n) " add_test_files
+        read -p "Create test files for PHPUnit? (y/n) " add_test_files
 
         if [ "y" = $add_test_files ]; then
             mkdir -p $TEST_PATH
+            cp -R ${DEVOPS_PATH}/phpunit.xml ${PLUGIN_PATH}/phpunit.xml
             cp -R ${DEVOPS_PATH}/tests/phpunit/. $TEST_PATH/phpunit/
-            echo "Test files added."
+            echo "PHPUnit est files added."
         elif [ "n" = $add_test_files ]; then
             echo "No test files added."
         else
@@ -92,8 +93,9 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
 
         if [ "y" = $add_test_files ]; then
             mkdir -p $TEST_PATH
+            cp -R ${DEVOPS_PATH}/behat.yml ${PLUGIN_PATH}/behat.yml
             cp -R ${DEVOPS_PATH}/tests/behat/. $TEST_PATH/behat/
-            echo "Test files added."
+            echo "behat test files added."
         elif [ "n" = $add_test_files ]; then
             echo "No test files added."
         else
