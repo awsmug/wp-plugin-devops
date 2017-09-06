@@ -26,7 +26,7 @@
         "codeclimate/php-test-reporter": "^0.4.4",
         "wp-cli/wp-cli": "^1.3"
     },
-    "bin": ["bin/webserver", "bin/test"],
+    "bin": ["bin/webserver"],
     "require": {
         "awsmug/wp-plugin-devops": "dev-master"
     }

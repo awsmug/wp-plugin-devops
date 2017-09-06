@@ -124,16 +124,20 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
 fi
 
+# Running command
 if [ "$1" = "start" ]; then
     $BIN_PATH/start.sh
 
 elif [ "$1" = "stop" ]; then
     $BIN_PATH/stop.sh
 
+elif [ "$1" = "test" ]; then
+    $BIN_PATH/test.sh $2
+
 elif [ "$1" = "clean" ]; then
     $BIN_PATH/clean.sh
 
 else
-    echo "Usage: $(basename $0) <start|stop|clean>"
+    echo "Usage: $(basename $0) <start|stop|test|clean>"
     exit 1
 fi
