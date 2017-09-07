@@ -18,6 +18,7 @@ export WP_CONTAINER_NAME="${CONTAINER_PREFIX}wp_1"
 export PLUGIN_PATH=$SCRIPT_PATH
 export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
 export DOCKER_COMPOSE_FILE="${PLUGIN_PATH}/docker-compose.yml"
+export REMOTE_PLUGIN_PATH=${PLUGIN_PATH}/wordpress/wp-content/plugins/
 
 function add_to_gitignore {
     echo "###" >> $1

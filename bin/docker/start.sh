@@ -15,7 +15,6 @@ sleep 90
 docker exec ${WP_CONTAINER_NAME} wp plugin update --all --path=/var/www/html
 docker exec ${WP_CONTAINER_NAME} wp theme update --all --path=/var/www/html
 
-REMOTE_PLUGIN_PATH=${PLUGIN_PATH}/wordpress/wp-content/plugins/
 docker exec ${WP_CONTAINER_NAME} mkdir -p ${REMOTE_PLUGIN_PATH}
 ${BIN_PATH}/sync.sh
 docker exec ${WP_CONTAINER_NAME} wp plugin activate ${PLUGIN_SLUG} --path=/var/www/html
