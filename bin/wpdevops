@@ -134,6 +134,9 @@ elif [ "$1" = "stop" ]; then
 elif [ "$1" = "test" ]; then
     $BIN_PATH/test.sh $2
 
+elif [ "$1" = "sync" ]; then
+    $BIN_PATH/sync.sh
+
 elif [ "$1" = "clean" ]; then
     $BIN_PATH/clean.sh
 
