@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Setting up directory variables
 export SCRIPT_PATH=$(pwd)
