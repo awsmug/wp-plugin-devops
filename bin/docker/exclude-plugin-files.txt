@@ -11,6 +11,5 @@ log
 project.cfg
 project.sh
 wordpress
-vendor
 test
 webserver
