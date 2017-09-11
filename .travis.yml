@@ -27,9 +27,9 @@ before_install:
   - export PHP_FPM_BIN="$HOME/.phpenv/versions/$PHP_VERSION/sbin/php-fpm"
   - export CURRENT_DIR=$(pwd)
   - export PROJECT_DIR=$CURRENT_DIR
-  - if [ ! -f $PROJECT_DIR/bin/travis/travis-wordpress.sh ]; then export BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin/travis; else BIN_DIR=$PROJECT_DIR/bin/travis; fi
+  - if [ ! -f $PROJECT_DIR/bin/travis/travis-wordpress.sh ]; then export BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin; else BIN_DIR=$PROJECT_DIR/bin; fi
   - export VENDOR_BIN_DIR=$PROJECT_DIR/vendor/bin/
-  - export PATH=$PATH:$VENDOR_BIN_DIR:$BIN_DIR
+  - export PATH=$PATH:$VENDOR_BIN_DIR:$BIN_DIR/travis
   - export NGINX_DIR=/tmp
   - export DB_NAME="wordpress"
   - export DB_USER="root"
@@ -37,6 +37,7 @@ before_install:
   - export DB_HOST="localhost"
   - export WP_DIR="${CURRENT_DIR}/wordpress/"
   - export PLUGIN_DIR=$PROJECT_DIR
+  - export REMOTE_PLUGIN_DIR=$WP_DIR/wp-content/plugins
   - export PLUGIN_SLUG=$(basename $PROJECT_DIR)
 
 install:
@@ -46,6 +47,7 @@ before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - if [[ "$BEHAT" == "1" ]]; then $BIN_DIR/webserver.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION $WP_DIR; fi
   - cd ..
+  - rsync -rv --exclude-from=${BIN_PATH}/exclude-plugin-files.txt ${PLUGIN_PATH} ${REMOTE_PLUGIN_DIR}
   - cp -r "$PLUGIN_SLUG" "$WP_DIR/wp-content/plugins/$PLUGIN_SLUG"
   - cd "$PLUGIN_SLUG"
   - wp plugin activate $PLUGIN_SLUG --path=$WP_DIR
