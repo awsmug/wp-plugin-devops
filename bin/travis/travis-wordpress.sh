@@ -14,7 +14,7 @@ DB_USER=$2
 DB_PASS=$3
 DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
-WP_DIR=${6-/tmp/wordpress}
+WP_DIR=${6-./wordpress}
 
 # Download.
 mkdir -p $WP_DIR
