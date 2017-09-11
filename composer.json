@@ -14,7 +14,7 @@
         "psr-4": { "PluginTests\\": "tests/behat/bootstrap" }
     },
     "require": {
-        "paulgibbs/behat-wordpress-extension": "^0.7.0",
+        "paulgibbs/behat-wordpress-extension": "^0.7.1",
         "behat/behat": "^3.3",
         "behat/gherkin": "^4.4",
         "behat/mink": "^1.7",
