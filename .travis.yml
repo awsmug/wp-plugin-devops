@@ -63,6 +63,6 @@ notifications:
 after_script:
   # Tidy up after test run.
   # See https://github.com/travis-ci/travis-ci/issues/6861
-  - if [[ "$BEHAT" == "1" ]]; then kill -9 $(ps aux | grep 'selenium' | awk '{print $2}'); fi
-  - if [[ "$BEHAT" == "1" ]]; then kill -9 $(ps aux | grep 'java' | awk '{print $2}'); fi
-  - if [[ "$BEHAT" == "1" ]]; then kill -9 $(ps aux | grep 'Xvfb' | awk '{print $2}'); fi
+  - if [[ ${BEHAT} == "1" ]]; then kill -9 $(ps aux | grep 'selenium' | awk '{print $2}'); fi
+  - if [[ ${BEHAT} == "1" ]]; then kill -9 $(ps aux | grep 'java' | awk '{print $2}'); fi
+  - if [[ ${BEHAT} == "1" ]]; then kill -9 $(ps aux | grep 'Xvfb' | awk '{print $2}'); fi
