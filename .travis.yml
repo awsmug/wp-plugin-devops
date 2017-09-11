@@ -28,6 +28,7 @@ before_install:
   - export CURRENT_DIR=$(pwd)
   - export PROJECT_DIR=$CURRENT_DIR
   - export BIN_DIR=$PROJECT_DIR/bin/travis
+  - if [ ! -f bin/travis/travis-wordpress.sh ] export PLUGIN_DEVOPS_BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin/travis; else $PROJECT_DIR/bin/travis; fi
   - export PLUGIN_DEVOPS_BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin/travis
   - export VENDOR_BIN_DIR=$PROJECT_DIR/vendor/bin/
   - export PATH=$PATH:$VENDOR_BIN_DIR:$BIN_DIR
