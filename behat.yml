@@ -13,7 +13,7 @@ default:
         - PaulGibbs\WordpressBehatExtension\Context\SiteContext
         - PaulGibbs\WordpressBehatExtension\Context\UserContext
         - PaulGibbs\WordpressBehatExtension\Context\EditPostContext
-        - PaulGibbs\WordpressBehatExtension\Context\WidgetContext
+        - PaulGibbs\WordpressBehatExtension\Context\WidgetContexts
 
   extensions:
     Behat\MinkExtension:
@@ -29,7 +29,7 @@ default:
           selenium2: ~
 
     PaulGibbs\WordpressBehatExtension:
-      path: %paths.base%/wordpress
+      path: ./wordpress
       users:
         admin:
           username: admin

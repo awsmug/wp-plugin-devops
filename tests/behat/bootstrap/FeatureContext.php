@@ -37,14 +37,6 @@ class FeatureContext extends UserContext implements SnippetAcceptingContext
 	}
 
 	/**
-	 * @Then I am on the Dashboard
-	 */
-	public function iAmOnTheDashboard()
-	{
-		$this->dashboard->iAmOnDashboard();
-	}
-
-	/**
 	 * @Then I go to the menu Settings
 	 */
 	public function iGoToTheMenuSettings()
