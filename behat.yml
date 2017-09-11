@@ -13,7 +13,6 @@ default:
         - PaulGibbs\WordpressBehatExtension\Context\SiteContext
         - PaulGibbs\WordpressBehatExtension\Context\UserContext
         - PaulGibbs\WordpressBehatExtension\Context\EditPostContext
-        - PaulGibbs\WordpressBehatExtension\Context\WidgetContexts
 
   extensions:
     Behat\MinkExtension:
