@@ -27,6 +27,7 @@ before_install:
   - export CURRENT_DIR=$(pwd)
   - export PROJECT_DIR=$CURRENT_DIR
   - export BIN_DIR=$PROJECT_DIR/bin/travis
+  - export PLUGIN_DEVOPS_BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin/travis
   - export VENDOR_BIN_DIR=$PROJECT_DIR/vendor/bin/
   - export PATH=$PATH:$VENDOR_BIN_DIR:$BIN_DIR
   - export NGINX_DIR=/tmp
@@ -43,9 +44,7 @@ install:
 
 before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-  - if [[ "$BEHAT" == "1" ]]; then travis-wordpress.sh $DB_NAME $DB_USER $DB_PASS $DB_HOST $WP_VERSION $WP_DIR; fi
-  - if [[ "$BEHAT" == "1" ]]; then travis-nginx.sh; fi
-  - if [[ "$BEHAT" == "1" ]]; then travis-selenium.sh; fi
+  - if [[ "$BEHAT" == "1" ]]; then $PLUGIN_DEVOPS_BIN_DIR/webserver.sh; fi
   - cd ..
   - cp -r "$PLUGIN_SLUG" "$WP_DIR/wp-content/plugins/$PLUGIN_SLUG"
   - cd "$PLUGIN_SLUG"
