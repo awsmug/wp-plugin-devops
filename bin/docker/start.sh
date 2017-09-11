@@ -7,7 +7,7 @@ docker-compose -f ${DOCKER_COMPOSE_FILE} up -d
 echo "Initializing project..." >&2
 
 echo "Waiting for Database..."
-${BIN_PATH}/waitfor localhost 3306 # Does not take effect right now
+${BIN_DIR}/waitfor localhost 3306 # Does not take effect right now
 
 echo "Database ready."
 sleep 90
@@ -16,7 +16,7 @@ docker exec ${WP_CONTAINER_NAME} wp plugin update --all --path=/var/www/html
 docker exec ${WP_CONTAINER_NAME} wp theme update --all --path=/var/www/html
 
 docker exec ${WP_CONTAINER_NAME} mkdir -p ${REMOTE_PLUGIN_PATH}
-${BIN_PATH}/sync.sh
+${BIN_DIR}/sync.sh
 docker exec ${WP_CONTAINER_NAME} wp plugin activate ${PLUGIN_SLUG} --path=/var/www/html
 
 # Custom user scripts
