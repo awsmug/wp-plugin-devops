@@ -2,8 +2,6 @@
 
 namespace PluginTests;
 
-use PaulGibbs\WordpressBehatExtension\Context\UserContext;
-
 /**
  * Defines application features from the specific context.
  */
