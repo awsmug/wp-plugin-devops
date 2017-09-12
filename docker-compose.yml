@@ -1,7 +1,6 @@
 version: '3.1'
 services:
   wp:
-    hostname: wordpress
     image: mahype/wordpress:latest
     environment:
       MYSQL_HOST: db
@@ -20,6 +19,7 @@ services:
       - db
       - php
   web:
+    hostname: wordpress
     image: nginx:latest
     ports:
       - 80:80

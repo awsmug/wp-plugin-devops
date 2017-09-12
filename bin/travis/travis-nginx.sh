@@ -9,7 +9,7 @@ USER=$(whoami)
 
 ROOT=$WP_DIR
 PORT=9000
-SERVER=wordpress.dev
+SERVER=wordpress
 
 function tpl {
   sed \
