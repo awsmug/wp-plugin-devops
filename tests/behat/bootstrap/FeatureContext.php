@@ -28,15 +28,13 @@ class FeatureContext extends UserContext
 	{
 		$this->visitPath( "/" );
 		$page = $this->getSession()->getPage();
-		$node = $page->find('css','.wrap h1' );
+		$node = $page->find('css','.wrap h2' );
 
 		try {
 			$node->focus();
-			print_r( $node );
-			print_r( $e );
 		} catch (UnsupportedDriverActionException $e) {
 			print_r( $node );
-			print_r( $e );
+			print_r( $e->getMessage() );
 		}
 		$title = $node->getText();
 	}
