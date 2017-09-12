@@ -9,7 +9,7 @@ default:
         - PluginTests\FeatureContext
 
   extensions:
-    Behat\MinkExtension:
+    Behat\MinkExtension\Extension:
       base_url: http://wordpress
       default_session: default
       javascript_session: selenium2
