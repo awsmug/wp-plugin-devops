@@ -18,7 +18,7 @@ WP_DIR=${6-${CURRENT_DIR}/wordpress}
 
 # Download.
 mkdir -p $WP_DIR
-wp core download --force --version=$WP_VERSION --path=$WP_DIR
+wp core download --force --version=$WP_VERSION --path=$WP_DIR --locale=en_US
 
 # Create config.
 rm -f ${WP_DIR}wp-config.php
