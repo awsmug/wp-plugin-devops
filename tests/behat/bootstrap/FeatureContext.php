@@ -32,6 +32,8 @@ class FeatureContext extends UserContext
 
 		try {
 			$node->focus();
+			print_r( $node );
+			print_r( $e );
 		} catch (UnsupportedDriverActionException $e) {
 			print_r( $node );
 			print_r( $e );
