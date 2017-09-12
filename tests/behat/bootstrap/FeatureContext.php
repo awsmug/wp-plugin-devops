@@ -2,13 +2,12 @@
 
 namespace PluginTests;
 
-use Behat\Behat\Context\SnippetAcceptingContext;
-use PaulGibbs\WordpressBehatExtension\Context\UserContext;
+use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends UserContext implements SnippetAcceptingContext
+class FeatureContext extends RawWordpressContext
 {
 	public $dashboard;
 
@@ -21,6 +20,7 @@ class FeatureContext extends UserContext implements SnippetAcceptingContext
      */
     public function __construct()
     {
+	    parent::__construct();
     }
 
 	/**
@@ -37,6 +37,7 @@ class FeatureContext extends UserContext implements SnippetAcceptingContext
 	 */
 	public function iGoToTheMenuSettings()
 	{
+		$this->getPage()
 		$this->dashboard->iGoToMenuItem( 'Settings' );
 	}
 
