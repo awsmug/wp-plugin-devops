@@ -5,7 +5,6 @@ default:
         - %paths.base%/tests/behat
 
       contexts:
-        - PaulGibbs\WordpressBehatExtension\Context\WordpressContext
         - PluginTests\FeatureContext
 
   extensions:
