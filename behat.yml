@@ -5,7 +5,7 @@ default:
         - %paths.base%/tests/behat
 
       contexts:
-        - Behat\MinkExtension
+        - Behat\MinkExtension\Context\MinkContext
         - PluginTests\FeatureContext
 
   extensions:
