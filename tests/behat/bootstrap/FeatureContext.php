@@ -27,16 +27,7 @@ class FeatureContext extends UserContext
 	public function iAmOnMySite()
 	{
 		$this->visitPath( "/" );
-		$page = $this->getSession()->getPage();
-		$node = $page->find('css','.wrap h2' );
 
-		try {
-			$node->focus();
-		} catch (UnsupportedDriverActionException $e) {
-			print_r( $node );
-			print_r( $e->getMessage() );
-		}
-		$title = $node->getText();
 	}
 
 	/**
