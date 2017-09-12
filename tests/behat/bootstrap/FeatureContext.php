@@ -2,6 +2,9 @@
 
 namespace PluginTests;
 
+use PaulGibbs\WordpressBehatExtension\Context\UserContext;
+use Behat\Behat\Context\SnippetAcceptingContext;
+
 /**
  * Defines application features from the specific context.
  */
