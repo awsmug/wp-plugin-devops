@@ -14,6 +14,7 @@ default:
   extensions:
     Behat\MinkExtension:
       base_url: http://wordpress
+      browser_name: chrome
       default_session: default
       javascript_session: selenium2
       sessions:
@@ -25,6 +26,7 @@ default:
           selenium2: ~
 
     PaulGibbs\WordpressBehatExtension:
+      default_driver: wpcli
       path: ./wordpress
       users:
         admin:
