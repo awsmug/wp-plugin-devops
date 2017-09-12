@@ -37,8 +37,7 @@ class FeatureContext extends RawWordpressContext
 	 */
 	public function iGoToTheMenuSettings()
 	{
-		$this->getPage()
-		$this->dashboard->iGoToMenuItem( 'Settings' );
+
 	}
 
 	/**
