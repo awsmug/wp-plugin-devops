@@ -2,15 +2,13 @@
 
 namespace PluginTests;
 
-use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
+use PaulGibbs\WordpressBehatExtension\Context\UserContext;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends RawWordpressContext
+class FeatureContext extends UserContext
 {
-	public $dashboard;
-
     /**
      * Initializes context.
      *
@@ -29,7 +27,6 @@ class FeatureContext extends RawWordpressContext
 	public function iAmOnMySite()
 	{
 		$this->visitPath( "/" );
-
 	}
 
 	/**
