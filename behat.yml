@@ -8,8 +8,6 @@ default:
         - PaulGibbs\WordpressBehatExtension\Context\WordpressContext
         - PluginTests\FeatureContext
         - Behat\MinkExtension\Context\MinkContext
-        - PaulGibbs\WordpressBehatExtension\Context\ContentContext
-        - PaulGibbs\WordpressBehatExtension\Context\SiteContext
 
   extensions:
     Behat\MinkExtension:
