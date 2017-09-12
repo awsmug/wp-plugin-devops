@@ -6,6 +6,7 @@ default:
 
       contexts:
         - Behat\MinkExtension\Context\MinkContext
+        - Behat\Mink\Element
         - PluginTests\FeatureContext
 
   extensions:
