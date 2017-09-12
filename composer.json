@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "\\": "tests/behat/bootstrap"
+            "PluginTests\\": "tests/behat/bootstrap"
         }
     },
     "require": {

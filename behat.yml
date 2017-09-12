@@ -7,7 +7,7 @@ default:
       contexts:
         - PaulGibbs\WordpressBehatExtension\Context\WordpressContext
         - PaulGibbs\WordpressBehatExtension\Context\UserContext
-        - FeatureContext
+        - PluginTests\FeatureContext
 
   extensions:
     Behat\MinkExtension:

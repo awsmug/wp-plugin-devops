@@ -1,5 +1,7 @@
 <?php
 
+namespace PluginTests;
+
 use PaulGibbs\WordpressBehatExtension\Context\UserContext;
 use Behat\Behat\Context\SnippetAcceptingContext;
 
