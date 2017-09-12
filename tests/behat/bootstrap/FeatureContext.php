@@ -3,11 +3,7 @@
 namespace PluginTests;
 
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Behat\Tester\Exception\PendingException;
-use PaulGibbs\WordpressBehatExtension\Context\DashboardContext;
-use PaulGibbs\WordpressBehatExtension\Context\RawWordpressContext;
 use PaulGibbs\WordpressBehatExtension\Context\UserContext;
-use PaulGibbs\WordpressBehatExtension\PageObject\Dashboard;
 
 /**
  * Defines application features from the specific context.
