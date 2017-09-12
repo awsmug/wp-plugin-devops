@@ -12,8 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "PluginTests\\": "tests/behat/bootstrap",
-            "PaulGibbs\\WordpressBehatExtension\\": "vendor/paulgibbs/behat-woprdpress-extension/src"
+            "PluginTests\\": "tests/behat/bootstrap"
         }
     },
     "require": {
