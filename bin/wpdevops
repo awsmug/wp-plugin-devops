@@ -122,7 +122,8 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     fi
 
     echo "Copy Docker compose file..."
-    cp ${DEVOPS_PATH}/docker-compose.yml ${DOCKER_COMPOSE_FILE}
+    sed 's/.\/bin\/docker\/nginx\/default.conf/.\/vendor\/awsmug\/wp-plugin-devops\/bin\/docker\/nginx\/default.conf/' ${DEVOPS_PATH}/docker-compose.yml > ${DOCKER_COMPOSE_FILE}
+
 fi
 
 # Running command
