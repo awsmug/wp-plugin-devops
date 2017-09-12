@@ -5,9 +5,9 @@ default:
         - %paths.base%/tests/behat
 
       contexts:
-        - Behat\MinkExtension\Context\MinkContext
-        - Behat\MinkExtension\Context\RawMinkContext
+        - PaulGibbs\WordpressBehatExtension\Context\WordpressContext
         - PluginTests\FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
 
   extensions:
     Behat\MinkExtension:
