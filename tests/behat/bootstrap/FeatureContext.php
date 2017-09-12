@@ -3,12 +3,11 @@
 namespace PluginTests;
 
 use PaulGibbs\WordpressBehatExtension\Context\UserContext;
-use PaulGibbs\WordpressBehatExtension\Context\WordpressContext;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext extends WordpressContext
+class FeatureContext extends UserContext
 {
     /**
      * Initializes context.
