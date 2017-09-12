@@ -1,5 +1,10 @@
 language: php
 
+cache:
+  directories:
+  - vendor
+  - $HOME/.composer/cache
+
 addons:
   apt:
     packages:
@@ -47,8 +52,8 @@ before_script:
   - wp plugin activate $PLUGIN_SLUG --path=${WP_DIR}
 
 script:
-  - if [[ ${BEHAT} == "1" ]]; then behat --config behat.yml; fi
-  - if [[ ${PHPUNIT} == "1" ]]; then phpunit -c phpunit.xml; fi
+  - if [[ ${BEHAT} == "1" ]]; then behat --config $PROJECT_DIR/behat.yml; fi
+  - if [[ ${PHPUNIT} == "1" ]]; then phpunit -c $PROJECT_DIR/phpunit.xml; fi
 
 notifications:
   email: false
