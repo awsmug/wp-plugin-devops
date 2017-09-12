@@ -8,16 +8,18 @@ services:
       MYSQL_USER: root
       MYSQL_PASS: p4ssw0rd!
       WP_VERSION: 4.8.1
-      WP_LOCALE: de_DE
+      WP_LOCALE: en_US
       WP_USER: admin
       WP_PASS: password
-      WP_URL: localhost
+      WP_URL: wordpress
       WP_INSTALL: "fresh"
     volumes:
       - ./wordpress:/var/www/html
     depends_on:
       - db
       - php
+    networks:
+      - testserver
   web:
     hostname: wordpress
     image: nginx:latest
@@ -26,14 +28,20 @@ services:
     volumes:
       - ./wordpress:/var/www/html
       - ./bin/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      testserver:
+        aliases:
+          - wordpress
   php:
-      image: mahype/phpbrew:latest
-      ports:
-        - "9000:9000"
-      volumes:
-        - ./wordpress:/var/www/html
-      environment:
-        PHP_VERSION: "7.1.8"
+    image: mahype/phpbrew:latest
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./wordpress:/var/www/html
+    environment:
+      PHP_VERSION: "7.1.8"
+    networks:
+      - testserver
   db:
     image: mariadb
     environment:
@@ -42,6 +50,8 @@ services:
       - dbdata:/var/lib/mysql
     ports:
       - 3306:3306
+    networks:
+        - testserver
   phpmyadmin:
     depends_on:
       - db
@@ -52,17 +62,23 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: p4ssw0rd!
+    networks:
+        - testserver
   behat:
-      hostname: behat
-      image: mahype/wordhat:latest
-      volumes:
-        - .:/src
-      # Run a built-in web server for access to HTML reports
-      ports:
-        - 8081:8000
-      entrypoint: "php -S 0.0.0.0:8000"
+    image: mahype/wordhat:latest
+    volumes:
+      - .:/src
+    # Run a built-in web server for access to HTML reports
+    ports:
+      - 8081:8000
+    entrypoint: "php -S 0.0.0.0:8000"
+    networks:
+      - testserver
   browser:
-      image: selenium/standalone-chrome
+    image: selenium/standalone-chrome
+    networks:
+      - testserver
+networks:
+  testserver:
 volumes:
-  wpdata:
   dbdata:

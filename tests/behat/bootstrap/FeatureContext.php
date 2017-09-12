@@ -31,11 +31,20 @@ class FeatureContext extends UserContext
 	}
 
 	/**
+	 * @Then I am on the Dashboard
+	 */
+	public function iAmOnTheDashboard()
+	{
+		$this->visitPath( "/wp-admin/" );
+	}
+
+
+	/**
 	 * @Then I go to the menu Settings
 	 */
 	public function iGoToTheMenuSettings()
 	{
-		$this->visitPath( "/wp-admin/settings.php" );
+		$this->visitPath( "/wp-admin/options-general.php" );
 	}
 
 	/**
