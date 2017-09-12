@@ -41,7 +41,7 @@ before_install:
   - export PLUGIN_SLUG=$(basename $PROJECT_DIR)
 
 install:
-  - composer require require-dev --no-progress
+  - composer require --dev --no-progress
 
 before_script:
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
