@@ -34,7 +34,7 @@ class FeatureContext extends UserContext
 	 */
 	public function iGoToTheMenuSettings()
 	{
-
+		$this->visitPath( "/wp-admin/settings.php" );
 	}
 
 	/**
