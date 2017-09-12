@@ -6,12 +6,11 @@ default:
 
       contexts:
         - PaulGibbs\WordpressBehatExtension\Context\WordpressContext
-        - PaulGibbs\WordpressBehatExtension\Context\UserContext
         - PluginTests\FeatureContext
 
   extensions:
     Behat\MinkExtension:
-      base_url: http://wordpress
+      base_url: http://wp
       default_session: default
       javascript_session: selenium2
       sessions:
