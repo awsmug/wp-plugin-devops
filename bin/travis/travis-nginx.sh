@@ -10,7 +10,6 @@ PHP_VERSION=$(phpenv version-name)
 ROOT=$WP_DIR
 PORT=9000
 SERVER=wordpress
-NGINX_DIR=$(pwd)
 
 function tpl {
   sed \
@@ -26,7 +25,6 @@ function tpl {
 mkdir -p "$NGINX_DIR/nginx/sites-enabled"
 
 # Configure the PHP handler.
-
 PHP_FPM_CONF="$NGINX_DIR/nginx/php-fpm.conf"
 
 # Start php-fpm.
