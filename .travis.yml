@@ -23,8 +23,6 @@ before_install:
   - export CURRENT_DIR=$(pwd)
   - export PROJECT_DIR=$CURRENT_DIR
   - if [ -e $PROJECT_DIR/bin/travis/webserver.sh ]; then export BIN_DIR=$PROJECT_DIR/bin; fi
-  - echo "PROJECT DIR: $PROJECT_DIR"
-  - echo "BIN DIR: $BIN_DIR"
   #- if [ -e $PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin/travis/webserver.sh ]; then export BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin; fi
   - export VENDOR_BIN_DIR=$PROJECT_DIR/vendor/bin/
   - export PATH=$PATH:$VENDOR_BIN_DIR:$BIN_DIR/travis
@@ -39,9 +37,10 @@ before_install:
   - export PLUGIN_SLUG=$(basename $PROJECT_DIR)
 
 install:
+  - echo $BIN_DIR
   - composer install --no-interaction --prefer-dist --no-progress
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
-  - if [[ "${BEHAT}" == "1" ]]; then ${BIN_DIR}/travis/webserver.sh ${DB_NAME} ${DB_USER} ${DB_PASS} ${DB_HOST} ${WP_VERSION} ${WP_DIR}; fi
+  - if [[ "${BEHAT}" == "1" ]]; then webserver.sh ${DB_NAME} ${DB_USER} ${DB_PASS} ${DB_HOST} ${WP_VERSION} ${WP_DIR}; fi
 
 before_script:
   - cd ..
