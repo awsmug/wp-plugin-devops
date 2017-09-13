@@ -57,8 +57,7 @@ script:
   - if [[ ${PHPUNIT} == "1" ]]; then phpunit -c ${PROJECT_DIR}/phpunit.xml; fi
   - curl http://wordpress
   - cat $WP_DIR/index.php
-  - cat $WP_DIR/index.html
-  - cat $WP_DIR/index.htm
+  - cat $NGINX_DIR/nginx/nginx.conf
   - cat $NGINX_DIR/nginx/sites-enabled/default-site.conf
 
 notifications:
