@@ -38,4 +38,3 @@ tpl "$BIN_DIR/travis/conf/default-site.tpl.conf" "$NGINX_DIR/nginx/sites-enabled
 
 # Start nginx.
 nginx -c "$NGINX_DIR/nginx/nginx.conf"
-nginx -T
