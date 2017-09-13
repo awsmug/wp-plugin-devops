@@ -37,8 +37,6 @@ before_install:
   - export PLUGIN_SLUG=$(basename $PROJECT_DIR)
 
 install:
-  - echo $BIN_DIR
-  - echo $PROJECT_DIR
   - composer install --no-interaction --prefer-dist --no-progress
   - echo "USE mysql;\nUPDATE user SET password=PASSWORD('root') WHERE user='root';\nFLUSH PRIVILEGES;\n" | mysql -u root
   - if [[ "${BEHAT}" == "1" ]]; then webserver.sh ${DB_NAME} ${DB_USER} ${DB_PASS} ${DB_HOST} ${WP_VERSION} ${WP_DIR}; fi
