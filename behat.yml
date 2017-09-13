@@ -25,7 +25,7 @@ default:
 
     PaulGibbs\WordpressBehatExtension:
       default_driver: wpcli
-      path: ./wordpress
+      path: /tmp/wordpress
       users:
         admin:
           username: admin
