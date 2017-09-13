@@ -10,6 +10,12 @@ export DEVOPS_PATH=$(dirname $(dirname $BIN_DIR))
 export SERVER_HOST="localhost"
 export SERVER_IP="10.221.50.1"
 
+if [ -f vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf ]; then
+    NGINX_CONF=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
+else
+    NGINX_CONF=bin/docker/nginx/default.conf
+fi
+
 # Setting up docker variables
 CONTAINER_PREFIX=$(basename ${SCRIPT_PATH})
 CONTAINER_PREFIX=${CONTAINER_PREFIX// /}
@@ -138,14 +144,15 @@ if [ "$1" = "start" ]; then
         mv ${DOCKER_COMPOSE_FILE}-e ${DOCKER_COMPOSE_FILE}
     fi
 
+    if [ -f ${NGINX_CONF}-e ]; then
+        rm ${NGINX_CONF}
+        mv ${NGINX_CONF}-e ${NGINX_CONF}
+    fi
+
     sed -i -e s/wordpress.dev/${SERVER_HOST}/g ${DOCKER_COMPOSE_FILE} \
         -i -e s/999.999.999.999/${SERVER_IP}/g ${DOCKER_COMPOSE_FILE}
 
-    if [ -f vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf ]; then
-        sed -i -e s/wordpress.dev/${SERVER_HOST}/g vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
-    else
-        sed -i -e s/wordpress.dev/${SERVER_HOST}/g bin/docker/nginx/default.conf
-    fi
+    sed -i -e s/wordpress.dev/${SERVER_HOST}/g ${NGINX_CONF}
 
     $BIN_DIR/start.sh
 
