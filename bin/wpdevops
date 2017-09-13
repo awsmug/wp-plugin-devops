@@ -5,10 +5,9 @@ export SCRIPT_PATH=$(pwd)
 RELATIVE_LINK_DIR="$(dirname "$(readlink "$0")")"
 VENDOR_BIN_DIR="`dirname \"$0\"`"              # relative
 VENDOR_BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && pwd )`"  # absolutized and normalized
-export BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && cd \"$RELATIVE_LINK_DIR\" && pwd )`/docker"
-export DEVOPS_PATH=$(dirname $(dirname $BIN_DIR))
+export BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && cd \"$RELATIVE_LINK_DIR\" && pwd )`"
+export DEVOPS_PATH=$(dirname $BIN_DIR)
 export SERVER_HOST="localhost"
-export SERVER_IP="10.221.50.1"
 
 if [ -f vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf ]; then
     NGINX_CONF=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
@@ -40,7 +39,12 @@ function add_to_gitignore {
 }
 
 # Copy Docker Compose file to plugin dir if not existing
-if [ ! -f $DOCKER_COMPOSE_FILE ]; then
+if [ ! -f ${DOCKER_COMPOSE_FILE} ] && [ ! -f ${DOCKER_COMPOSE_FILE}.dist ]; then
+    if [ -z "$2" ]; then
+        echo "This is the first run of the script. Please add a host to the parameters."
+        exit 1
+    fi
+
     GITIGNORE_FILE="${PLUGIN_PATH}/.gitignore"
 
     echo "This seems to be the first start of the WP Plugin Devops in this directory."
@@ -130,43 +134,36 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
     fi
 
     echo "Copy docker compose file..."
-    sed 's/.\/bin\/docker\/nginx\/default.conf/.\/vendor\/awsmug\/wp-plugin-devops\/bin\/docker\/nginx\/default.conf/' ${DEVOPS_PATH}/docker-compose.yml > ${DOCKER_COMPOSE_FILE}
+    sed 's/.\/bin\/docker\/nginx\/default.conf/.\/vendor\/awsmug\/wp-plugin-devops\/bin\/docker\/nginx\/default.conf/' ${DEVOPS_PATH}/docker-compose.yml.dist > ${DOCKER_COMPOSE_FILE}
 fi
 
 # Running command
 if [ "$1" = "start" ]; then
     if [ ! -z "$2" ]; then
         export SERVER_HOST=$2
+
+        cp "${DOCKER_COMPOSE_FILE}.dist" ${DOCKER_COMPOSE_FILE}
+        cp "${NGINX_CONF}.dist" ${NGINX_CONF}
+
+        sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${DOCKER_COMPOSE_FILE}
+        sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${NGINX_CONF}
+
+        rm ${NGINX_CONF}-e
+        rm ${DOCKER_COMPOSE_FILE}-e
     fi
-
-    if [ -f ${DOCKER_COMPOSE_FILE}-e ]; then
-        rm ${DOCKER_COMPOSE_FILE}
-        mv ${DOCKER_COMPOSE_FILE}-e ${DOCKER_COMPOSE_FILE}
-    fi
-
-    if [ -f ${NGINX_CONF}-e ]; then
-        rm ${NGINX_CONF}
-        mv ${NGINX_CONF}-e ${NGINX_CONF}
-    fi
-
-    sed -i -e s/wordpress.dev/${SERVER_HOST}/g ${DOCKER_COMPOSE_FILE} \
-        -i -e s/999.999.999.999/${SERVER_IP}/g ${DOCKER_COMPOSE_FILE}
-
-    sed -i -e s/wordpress.dev/${SERVER_HOST}/g ${NGINX_CONF}
-
-    $BIN_DIR/start.sh
+    $BIN_DIR/docker/start.sh
 
 elif [ "$1" = "stop" ]; then
-    $BIN_DIR/stop.sh
+    $BIN_DIR/docker/stop.sh
 
 elif [ "$1" = "test" ]; then
-    $BIN_DIR/test.sh $2
+    $BIN_DIR/docker/test.sh $2
 
 elif [ "$1" = "sync" ]; then
-    $BIN_DIR/sync.sh
+    $BIN_DIR/docker/sync.sh
 
 elif [ "$1" = "clean" ]; then
-    $BIN_DIR/clean.sh
+    $BIN_DIR/docker/clean.sh
 
 else
     echo "Usage: $(basename $0) <start [hostname]|stop|test|clean>"

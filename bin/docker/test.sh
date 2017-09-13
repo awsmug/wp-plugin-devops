@@ -1,16 +1,16 @@
 #!/bin/sh
 
 if [ "$1" = "all" ]; then
-    $BIN_DIR/phpunit-tests.sh
-    $BIN_DIR/behat-tests.sh
+    $BIN_DIR/docker/phpunit-tests.sh
+    $BIN_DIR/docker/behat-tests.sh
     echo "Starting all tests"
 
 elif [ "$1" = "phpunit" ]; then
-    $BIN_DIR/phpunit-tests.sh
+    $BIN_DIR/docker/phpunit-tests.sh
     echo "Starting PHP Unit Tests"
 
 elif [ "$1" = "behat" ]; then
-    $BIN_DIR/behat-tests.sh
+    $BIN_DIR/docker/behat-tests.sh
     echo "Starting Behat Tests"
 
 else
