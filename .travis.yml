@@ -19,6 +19,7 @@ matrix:
 
 before_install:
   - apt-get update
+  - apt-get upgrade
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
