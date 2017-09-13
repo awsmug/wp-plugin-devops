@@ -18,8 +18,6 @@ matrix:
     env: WP_VERSION=latest BEHAT=1 PHPUNIT=1
 
 before_install:
-  - apt-get update
-  - apt-get upgrade
   - composer self-update
   - composer validate
   - phpenv config-rm xdebug.ini
