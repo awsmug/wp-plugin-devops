@@ -29,6 +29,7 @@ services:
       - ./bin/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
       testserver:
+        ipv4_address: 10.221.50.3
         aliases:
           - wordpress.dev
   php:
@@ -79,5 +80,8 @@ services:
       - testserver
 networks:
   testserver:
+    ipam:
+      config:
+        - subnet: 10.221.50.0/24
 volumes:
   dbdata:
