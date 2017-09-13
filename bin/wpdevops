@@ -131,7 +131,8 @@ if [ "$1" = "start" ]; then
     if [ ! -z "$2" ]; then
         export SERVER_HOST=$2
     fi
-    sed 's/wordpress.dev/'${SERVER_HOST}'/' ${DOCKER_COMPOSE_FILE} > ${DOCKER_COMPOSE_FILE}
+
+    sed -i -e s/wordpress.dev/${SERVER_HOST}/g ${DOCKER_COMPOSE_FILE}
 
     $BIN_DIR/start.sh
 
