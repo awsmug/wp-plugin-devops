@@ -8,6 +8,7 @@ VENDOR_BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && pwd )`"  # absolutized and normaliz
 export BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && cd \"$RELATIVE_LINK_DIR\" && pwd )`/docker"
 export DEVOPS_PATH=$(dirname $(dirname $BIN_DIR))
 export SERVER_HOST="localhost"
+export SERVER_IP="10.221.50.1"
 
 # Setting up docker variables
 CONTAINER_PREFIX=$(basename ${SCRIPT_PATH})
@@ -132,7 +133,19 @@ if [ "$1" = "start" ]; then
         export SERVER_HOST=$2
     fi
 
+    if [ -f ${DOCKER_COMPOSE_FILE}-e ]; then
+        rm ${DOCKER_COMPOSE_FILE}
+        mv ${DOCKER_COMPOSE_FILE}-e ${DOCKER_COMPOSE_FILE}
+    fi
+
     sed -i -e s/wordpress.dev/${SERVER_HOST}/g ${DOCKER_COMPOSE_FILE}
+    sed -i -e s/999.999.999.999/${SERVER_IP}/g ${DOCKER_COMPOSE_FILE}
+
+    if [ -f vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf ]; then
+        sed -i -e s/wordpress.dev/${SERVER_HOST}/g vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
+    else
+        sed -i -e s/wordpress.dev/${SERVER_HOST}/g bin/docker/nginx/default.conf
+    fi
 
     $BIN_DIR/start.sh
 

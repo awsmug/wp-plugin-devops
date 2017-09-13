@@ -13,6 +13,7 @@ services:
       WP_PASS: password
       WP_URL: wordpress.dev
       WP_INSTALL: "fresh"
+      WP_PLUGINS: wordpress-importer
     volumes:
       - ./wordpress:/var/www/html
     depends_on:
@@ -29,9 +30,7 @@ services:
       - ./bin/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
       testserver:
-        ipv4_address: 10.221.50.3
-        aliases:
-          - wordpress.dev
+        ipv4_address: 999.999.999.999
   php:
     image: mahype/phpbrew:latest
     ports:
