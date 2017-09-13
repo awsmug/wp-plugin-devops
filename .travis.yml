@@ -59,6 +59,7 @@ script:
   - cat $WP_DIR/index.php
   - cat $WP_DIR/index.html
   - cat $WP_DIR/index.htm
+  - cat $NGINX_DIR/nginx/sites-enabled/default-site.conf
 
 notifications:
   email: false
