@@ -138,8 +138,8 @@ if [ "$1" = "start" ]; then
         mv ${DOCKER_COMPOSE_FILE}-e ${DOCKER_COMPOSE_FILE}
     fi
 
-    sed -i -e s/wordpress.dev/${SERVER_HOST}/g ${DOCKER_COMPOSE_FILE}
-    sed -i -e s/999.999.999.999/${SERVER_IP}/g ${DOCKER_COMPOSE_FILE}
+    sed -i -e s/wordpress.dev/${SERVER_HOST}/g ${DOCKER_COMPOSE_FILE} \
+        -i -e s/999.999.999.999/${SERVER_IP}/g ${DOCKER_COMPOSE_FILE}
 
     if [ -f vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf ]; then
         sed -i -e s/wordpress.dev/${SERVER_HOST}/g vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
