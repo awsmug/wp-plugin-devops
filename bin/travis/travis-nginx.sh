@@ -6,7 +6,7 @@
 set -ex
 
 USER=$(whoami)
-
+PHP_VERSION=$(phpenv version-name)
 ROOT=$WP_DIR
 PORT=9000
 SERVER=wordpress
