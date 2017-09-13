@@ -59,10 +59,10 @@ script:
   - echo $WP_DIR
   - echo $NGINX_DIR
   - cat $WP_DIR/index.php
-  - cat $NGINX_DIR/nginx/nginx.conf
-  - cat $NGINX_DIR/nginx/sites-enabled/default-site.conf
-  - cat $NGINX_DIR/nginx/php-fpm.conf
-  - cat $NGINX_DIR/nginx/fastcgi.conf
+  - cat $NGINX_DIR/nginx.conf
+  - cat $NGINX_DIR/sites-enabled/default-site.conf
+  - cat $NGINX_DIR/php-fpm.conf
+  - cat $NGINX_DIR/fastcgi.conf
   - cat /tmp/error.log
 
 notifications:
