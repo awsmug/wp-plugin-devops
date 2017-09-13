@@ -23,7 +23,7 @@ before_install:
   - export CURRENT_DIR=$(pwd)
   - export PROJECT_DIR=$CURRENT_DIR
   - if [ -e $PROJECT_DIR/bin/travis/webserver.sh ]; then export BIN_DIR=$PROJECT_DIR/bin; fi
-  - if [ -e $PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin/travis/webserver.sh ]; then export BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin; fi
+  #- if [ -e $PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin/travis/webserver.sh ]; then export BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin; fi
   - export VENDOR_BIN_DIR=$PROJECT_DIR/vendor/bin/
   - export PATH=$PATH:$VENDOR_BIN_DIR:$BIN_DIR/travis
   - export NGINX_DIR=/tmp
