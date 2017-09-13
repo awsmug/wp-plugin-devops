@@ -61,6 +61,7 @@ script:
   - cat $NGINX_DIR/nginx/sites-enabled/default-site.conf
   - cat $NGINX_DIR/nginx/php-fpm.conf
   - cat $NGINX_DIR/nginx/fastcgi.conf
+  - cat /tmp/error.log
 
 notifications:
   email: false
