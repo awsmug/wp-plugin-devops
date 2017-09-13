@@ -22,7 +22,7 @@ before_install:
   - export PHP_FPM_BIN="$HOME/.phpenv/versions/$PHP_VERSION/sbin/php-fpm"
   - export CURRENT_DIR=$(pwd)
   - export PROJECT_DIR=$CURRENT_DIR
-  - if [ ! -f $PROJECT_DIR/bin/travis/travis-wordpress.sh ]; then export BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin; else BIN_DIR=$PROJECT_DIR/bin; fi
+  - if [ ! -e $PROJECT_DIR/bin/travis/travis-wordpress.sh ]; then export BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin; else BIN_DIR=$PROJECT_DIR/bin; fi
   - export VENDOR_BIN_DIR=$PROJECT_DIR/vendor/bin/
   - export PATH=$PATH:$VENDOR_BIN_DIR:$BIN_DIR/travis
   - export NGINX_DIR=/tmp
