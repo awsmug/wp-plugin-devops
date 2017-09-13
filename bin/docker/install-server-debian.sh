@@ -34,17 +34,20 @@ sudo apt-get install -y docker docker-ce
 sudo curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-mkdir -p srv/testing
-cd srv/testing/
-
 sudo curl -o /usr/local/bin/composer https://getcomposer.org/composer.phar
 sudo chmod +x /usr/local/bin/composer
 sudo adduser ${MAIN_USER} docker
 sudo adduser ${MAIN_USER} sudo
 
+su ${MAIN_USER}
+
 ##
 # Installing Test environment
 ##
+mkdir -p srv/testing
+cd srv/testing/
+
 git clone https://github.com/awsmug/wp-plugin-devops.git
 cd wp-plugin-devops/
 composer update
+bin/webserver start

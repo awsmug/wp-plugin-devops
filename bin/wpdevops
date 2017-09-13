@@ -7,6 +7,7 @@ VENDOR_BIN_DIR="`dirname \"$0\"`"              # relative
 VENDOR_BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && pwd )`"  # absolutized and normalized
 export BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && cd \"$RELATIVE_LINK_DIR\" && pwd )`/docker"
 export DEVOPS_PATH=$(dirname $(dirname $BIN_DIR))
+export SERVER_HOST="localhost"
 
 # Setting up docker variables
 CONTAINER_PREFIX=$(basename ${SCRIPT_PATH})
@@ -121,13 +122,17 @@ if [ ! -f $DOCKER_COMPOSE_FILE ]; then
         fi
     fi
 
-    echo "Copy Docker compose file..."
+    echo "Copy docker compose file..."
     sed 's/.\/bin\/docker\/nginx\/default.conf/.\/vendor\/awsmug\/wp-plugin-devops\/bin\/docker\/nginx\/default.conf/' ${DEVOPS_PATH}/docker-compose.yml > ${DOCKER_COMPOSE_FILE}
-
 fi
 
 # Running command
 if [ "$1" = "start" ]; then
+    if [ ! -z "$2" ]; then
+        export SERVER_HOST=$2
+    fi
+    sed 's/wordpress.dev/'${SERVER_HOST}'/' ${DOCKER_COMPOSE_FILE} > ${DOCKER_COMPOSE_FILE}
+
     $BIN_DIR/start.sh
 
 elif [ "$1" = "stop" ]; then
@@ -143,6 +148,6 @@ elif [ "$1" = "clean" ]; then
     $BIN_DIR/clean.sh
 
 else
-    echo "Usage: $(basename $0) <start|stop|test|clean>"
+    echo "Usage: $(basename $0) <start [hostname]|stop|test|clean>"
     exit 1
 fi

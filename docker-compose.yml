@@ -11,7 +11,7 @@ services:
       WP_LOCALE: en_US
       WP_USER: admin
       WP_PASS: password
-      WP_URL: wordpress
+      WP_URL: wordpress.dev
       WP_INSTALL: "fresh"
     volumes:
       - ./wordpress:/var/www/html
@@ -21,7 +21,6 @@ services:
     networks:
       - testserver
   web:
-    hostname: wordpress
     image: nginx:latest
     ports:
       - 80:80
@@ -31,7 +30,7 @@ services:
     networks:
       testserver:
         aliases:
-          - wordpress
+          - wordpress.dev
   php:
     image: mahype/phpbrew:latest
     ports:
