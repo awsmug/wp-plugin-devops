@@ -55,6 +55,8 @@ before_script:
 script:
   - if [[ ${BEHAT} == "1" ]]; then behat -vvv --config ${PROJECT_DIR}/behat.yml; fi
   - if [[ ${PHPUNIT} == "1" ]]; then phpunit -c ${PROJECT_DIR}/phpunit.xml; fi
+  - curl -I http://wordpress
+  - curl http://wordpress
 
 notifications:
   email: false
