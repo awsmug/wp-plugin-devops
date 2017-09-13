@@ -38,6 +38,6 @@ tpl "$BIN_DIR/travis/conf/default-site.tpl.conf" "$NGINX_DIR/sites-enabled/defau
 
 ps aux
 # Start nginx.
-nginx -v -t -c "$NGINX_DIR/nginx.conf" -s reload
+nginx -V -t -c "$NGINX_DIR/nginx.conf" -s reload
 
 ps aux
