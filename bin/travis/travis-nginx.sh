@@ -22,20 +22,20 @@ function tpl {
     < $1 > $2
 }
 
-mkdir -p "$NGINX_DIR/nginx/sites-enabled"
+mkdir -p "$NGINX_DIR/sites-enabled"
 
 # Configure the PHP handler.
-PHP_FPM_CONF="$NGINX_DIR/nginx/php-fpm.conf"
+PHP_FPM_CONF="$NGINX_DIR/php-fpm.conf"
 
 # Start php-fpm.
 tpl "$BIN_DIR/travis/conf/php-fpm.tpl.conf" "$PHP_FPM_CONF"
 "$PHP_FPM_BIN" --allow-to-run-as-root --fpm-config "$PHP_FPM_CONF"
 
 # Build the default nginx config files.
-tpl "$BIN_DIR/travis/conf/nginx.tpl.conf" "$NGINX_DIR/nginx/nginx.conf"
-tpl "$BIN_DIR/travis/conf/fastcgi.tpl.conf" "$NGINX_DIR/nginx/fastcgi.conf"
-tpl "$BIN_DIR/travis/conf/default-site.tpl.conf" "$NGINX_DIR/nginx/sites-enabled/default-site.conf"
+tpl "$BIN_DIR/travis/conf/nginx.tpl.conf" "$NGINX_DIR/nginx.conf"
+tpl "$BIN_DIR/travis/conf/fastcgi.tpl.conf" "$NGINX_DIR/fastcgi.conf"
+tpl "$BIN_DIR/travis/conf/default-site.tpl.conf" "$NGINX_DIR/sites-enabled/default-site.conf"
 
 # Start nginx.
-nginx -c "$NGINX_DIR/nginx/nginx.conf"
+nginx -c "$NGINX_DIR/nginx.conf"
 nginx -v

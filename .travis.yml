@@ -31,7 +31,7 @@ before_install:
   - if [ -e $PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin/travis/webserver.sh ]; then export BIN_DIR=$PROJECT_DIR/vendor/awsmug/wp-plugin-devops/bin; fi
   - export VENDOR_BIN_DIR=$PROJECT_DIR/vendor/bin/
   - export PATH=$PATH:$VENDOR_BIN_DIR:$BIN_DIR/travis
-  - export NGINX_DIR=/tmp
+  - export NGINX_DIR=/tmp/nginx
   - export DB_NAME="wordpress"
   - export DB_USER="root"
   - export DB_PASS="root"
