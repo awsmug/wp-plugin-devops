@@ -8,6 +8,7 @@ VENDOR_BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && pwd )`"  # absolutized and normaliz
 export BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && cd \"$RELATIVE_LINK_DIR\" && pwd )`"
 export DEVOPS_PATH=$(dirname $BIN_DIR)
 export SERVER_HOST="localhost"
+export SERVER_IP="10.221.50.20"
 
 if [ -f vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf ]; then
     NGINX_CONF=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
@@ -147,6 +148,12 @@ if [ "$1" = "start" ]; then
 
         sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${DOCKER_COMPOSE_FILE}
         sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${NGINX_CONF}
+
+        read -p "You have set a hostname. Do you want to add it to /etc/hosts on your System? (y/n): " add_hosts
+
+        if [ "y" = $add_hosts ]; then
+            echo "${SERVER_IP} ${SERVER_HOST}" >> /etc/hosts
+        fi
 
         rm ${NGINX_CONF}-e
         rm ${DOCKER_COMPOSE_FILE}-e
