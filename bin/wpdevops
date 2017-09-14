@@ -7,14 +7,9 @@ VENDOR_BIN_DIR="`dirname \"$0\"`"              # relative
 VENDOR_BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && pwd )`"  # absolutized and normalized
 export BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && cd \"$RELATIVE_LINK_DIR\" && pwd )`"
 export DEVOPS_PATH=$(dirname $BIN_DIR)
+
 export SERVER_HOST="localhost"
 export SERVER_IP="10.221.50.20"
-
-if [ -f vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf ]; then
-    NGINX_CONF=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
-else
-    NGINX_CONF=bin/docker/nginx/default.conf
-fi
 
 # Setting up docker variables
 CONTAINER_PREFIX=$(basename ${SCRIPT_PATH})
@@ -25,8 +20,22 @@ export WP_CONTAINER_NAME="${CONTAINER_PREFIX}wp_1"
 # Setting up WP variables
 export PLUGIN_PATH=$SCRIPT_PATH
 export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
-export DOCKER_COMPOSE_FILE="${PLUGIN_PATH}/docker-compose.yml"
 export REMOTE_PLUGIN_PATH=${PLUGIN_PATH}/wordpress/wp-content/plugins/
+
+# Setting up files
+if [ -f vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist ]; then
+    # As Composer depency
+    export NGINX_CONF=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
+    export NGINX_CONF_DEST=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
+    export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/docker-compose.yml.dist
+else
+    # Direct variant
+    export NGINX_CONF=${PLUGIN_PATH}/bin/docker/nginx/default.conf.dist
+    export NGINX_CONF_DEST=${PLUGIN_PATH}/bin/docker/nginx/default.conf
+    export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/docker-compose.yml.dist
+fi
+
+export DOCKER_COMPOSE_DEST=${PLUGIN_PATH}/docker-compose.yml
 
 function add_to_gitignore {
     echo "###" >> $1
@@ -143,11 +152,14 @@ if [ "$1" = "start" ]; then
     if [ ! -z "$2" ]; then
         export SERVER_HOST=$2
 
-        cp "${DOCKER_COMPOSE_FILE}.dist" ${DOCKER_COMPOSE_FILE}
-        cp "${NGINX_CONF}.dist" ${NGINX_CONF}
+        cp ${DOCKER_COMPOSE_FILE} ${DOCKER_COMPOSE_DEST}
+        cp ${NGINX_CONF} ${NGINX_CONF_DEST}
 
-        sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${DOCKER_COMPOSE_FILE}
-        sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${NGINX_CONF}
+        echo ${DOCKER_COMPOSE_FILE}
+        echo ${DOCKER_COMPOSE_DEST}
+
+        sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${DOCKER_COMPOSE_DEST}
+        sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${NGINX_CONF_DEST}
 
         read -p "You have set a hostname. Do you want to add it to /etc/hosts on your System? (y/n): " add_hosts
 
@@ -155,9 +167,10 @@ if [ "$1" = "start" ]; then
             echo "${SERVER_IP} ${SERVER_HOST}" >> /etc/hosts
         fi
 
-        rm ${NGINX_CONF}-e
-        rm ${DOCKER_COMPOSE_FILE}-e
+        rm ${NGINX_CONF_DEST}-e
+        rm ${DOCKER_COMPOSE_DEST}-e
     fi
+
     $BIN_DIR/docker/start.sh
 
 elif [ "$1" = "stop" ]; then

@@ -2,15 +2,23 @@
 
 echo "Starting webserver..."
 
-docker-compose -f ${DOCKER_COMPOSE_FILE} up -d
+docker-compose -f ${DOCKER_COMPOSE_DEST} up -d
 
 echo "Initializing project..." >&2
 
-echo "Waiting for Database..."
+echo "Waiting for Database Container..."
 ${BIN_DIR}/docker/waitfor localhost 3306 # Does not take effect right now
 
 echo "Database ready."
-sleep 90
+
+echo "Waiting for Filesystem..."
+while [ ! -e ${PLUGIN_PATH}/wordpress/wp-config.php ]; do
+    sleep 1
+done
+
+sleep 3
+
+echo "File system ready."
 
 docker exec ${WP_CONTAINER_NAME} wp plugin update --all --path=/var/www/html
 docker exec ${WP_CONTAINER_NAME} wp theme update --all --path=/var/www/html
