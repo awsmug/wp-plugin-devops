@@ -9,7 +9,7 @@ USER=$(whoami)
 PHP_VERSION=$(phpenv version-name)
 ROOT=$WP_DIR
 PORT=9000
-SERVER=wordpress
+SERVER=wordpress.dev
 
 function tpl {
   sed \
