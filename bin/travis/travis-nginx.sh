@@ -36,8 +36,5 @@ tpl "$BIN_DIR/travis/conf/nginx.tpl.conf" "$NGINX_DIR/nginx.conf"
 tpl "$BIN_DIR/travis/conf/fastcgi.tpl.conf" "$NGINX_DIR/fastcgi.conf"
 tpl "$BIN_DIR/travis/conf/default-site.tpl.conf" "$NGINX_DIR/sites-enabled/default-site.conf"
 
-ps aux
-# Start nginx.
-nginx -V -t -c "$NGINX_DIR/nginx.conf" -s reload
-
-ps aux
+nginx -s stop
+nginx -V -t -c "$NGINX_DIR/nginx.conf"
