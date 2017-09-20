@@ -7,11 +7,11 @@ services:
       MYSQL_DB: wp
       MYSQL_USER: root
       MYSQL_PASS: p4ssw0rd!
-      WP_VERSION: 4.8.1
+      WP_VERSION: 4.8.2
       WP_LOCALE: en_US
       WP_USER: admin
       WP_PASS: password
-      WP_URL: wordpress.dev
+      WP_URL: localhost
       WP_INSTALL: "fresh"
     volumes:
       - ./wordpress:/var/www/html
