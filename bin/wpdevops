@@ -90,6 +90,6 @@ elif [ "$1" = "install" ]; then
     $BIN_DIR/docker/install.sh
 
 else
-    echo "Usage: $(basename $0) <start [hostname]|stop|test|clean>"
+    echo "Usage: $(basename $0) <start [hostname]|stop|test|clean|install>"
     exit 1
 fi
