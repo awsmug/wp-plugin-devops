@@ -22,20 +22,20 @@ export PLUGIN_PATH=$SCRIPT_PATH
 export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
 export REMOTE_PLUGIN_PATH=${PLUGIN_PATH}/wordpress/wp-content/plugins/
 
-mkdir conf
+mkdir -p devops/conf
 
 # Setting up files
 if [ -d vendor/awsmug/wp-plugin-devops ]; then
     # As Composer depency
     export NGINX_CONF_REL=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
     export NGINX_CONF=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF_DEST_REL=conf/default.conf
+    export NGINX_CONF_DEST_REL=devops/conf/default.conf
     export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
     export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/docker-compose.yml.dist
 else
     # Direct variant
     export NGINX_CONF=${PLUGIN_PATH}/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF_DEST_REL=conf/default.conf
+    export NGINX_CONF_DEST_REL=devops/conf/default.conf
     export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
     export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/docker-compose.yml.dist
 fi
