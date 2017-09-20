@@ -84,6 +84,11 @@ fi
 
 read -p "Please enter a hostname: " add_hostname
 
+if [ -z "$add_hostname" ]; then
+    echo "No host entered."
+    exit 1
+fi
+
 cp ${NGINX_CONF} ${NGINX_CONF_DESTT}
 
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${DOCKER_COMPOSE_DEST}
