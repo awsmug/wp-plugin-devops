@@ -11,6 +11,12 @@ function add_to_gitignore {
     echo "wordpress" >> $1
 }
 
+function escape_sed() {
+ sed \
+  -e 's/\//\\\//g' \
+  -e 's/\&/\\\&/g'
+}
+
 GITIGNORE_FILE="${PLUGIN_PATH}/.gitignore"
 
 if [ -e $GITIGNORE_FILE ]; then
@@ -96,8 +102,19 @@ fi
 read -p "Create a docker compose? (y/n) " add_docker_compose_file
 
 if [ "y" = $add_docker_compose_file ]; then
-    sed 's/.\/bin\/docker\/nginx\/default.conf/.\/vendor\/awsmug\/wp-plugin-devops\/bin\/docker\/nginx\/default.conf/' ${DEVOPS_PATH}/docker-compose.yml.dist > ${DOCKER_COMPOSE_FILE}
+    search='bin/docker/nginx/default.conf'
+    replace=${NGINX_CONF_DEST_REL}
+
+    echo ${search}
+    echo ${replace}
+
+    cp ${DOCKER_COMPOSE_FILE} ${DOCKER_COMPOSE_DEST}
+
+    echo 'Replace: '$replace
+
+    sed -i -e "s/${search//\//\\/}/${replace//\//\\/}/g" "${DOCKER_COMPOSE_DEST}"
     echo "Compose files added."
+
 elif [ "n" = $add_docker_compose_file ]; then
     echo "No compose files added."
 else

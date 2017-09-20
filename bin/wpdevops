@@ -23,15 +23,18 @@ export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
 export REMOTE_PLUGIN_PATH=${PLUGIN_PATH}/wordpress/wp-content/plugins/
 
 # Setting up files
-if [ -f vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist ]; then
+if [ -d vendor/awsmug/wp-plugin-devops ]; then
     # As Composer depency
+    export NGINX_CONF_REL=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
     export NGINX_CONF=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF_DEST=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
+    export NGINX_CONF_DEST_REL=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf
+    export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
     export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/docker-compose.yml.dist
 else
     # Direct variant
     export NGINX_CONF=${PLUGIN_PATH}/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF_DEST=${PLUGIN_PATH}/bin/docker/nginx/default.conf
+    export NGINX_CONF_DEST_REL=bin/docker/nginx/default.conf
+    export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
     export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/docker-compose.yml.dist
 fi
 
@@ -76,7 +79,7 @@ elif [ "$1" = "clean" ]; then
     $BIN_DIR/docker/clean.sh
 
 elif [ "$1" = "install" ]; then
-    $BIN_DIR/docker/install.sh
+    source $BIN_DIR/docker/install.sh
 
 else
     echo "Usage: $(basename $0) <start [hostname]|stop|test|clean|install>"
