@@ -1,5 +1,16 @@
 #!/bin/bash
 
+function add_to_gitignore {
+    echo "###" >> $1
+    echo "# Automatinc added files from WP Plugin Devops" >> $1
+    echo "###" >> $1
+    echo "composer.lock" >> $1
+    echo "test" >> $1
+    echo "webserver" >> $1
+    echo "vendor" >> $1
+    echo "wordpress" >> $1
+}
+
 GITIGNORE_FILE="${PLUGIN_PATH}/.gitignore"
 
 if [ -e $GITIGNORE_FILE ]; then
