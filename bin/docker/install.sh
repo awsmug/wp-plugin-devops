@@ -81,3 +81,11 @@ if [ "y" = $add_docker_compose_file ]; then
     rm ${DOCKER_COMPOSE_DEST}-e
     echo "Compose files added."
 fi
+
+read -p "Please enter a hostname: " add_hostname
+
+sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${DOCKER_COMPOSE_DEST}
+sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${NGINX_CONF_DEST}
+
+rm ${NGINX_CONF_DEST}-e
+rm ${DOCKER_COMPOSE_DEST}-e

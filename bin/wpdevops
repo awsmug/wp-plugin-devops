@@ -42,28 +42,6 @@ export DOCKER_COMPOSE_DEST=${PLUGIN_PATH}/docker-compose.yml
 
 # Running command
 if [ "$1" = "start" ]; then
-    if [ ! -z "$2" ]; then
-        export SERVER_HOST=$2
-
-        cp ${DOCKER_COMPOSE_FILE} ${DOCKER_COMPOSE_DEST}
-        cp ${NGINX_CONF} ${NGINX_CONF_DEST}
-
-        echo ${DOCKER_COMPOSE_FILE}
-        echo ${DOCKER_COMPOSE_DEST}
-
-        sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${DOCKER_COMPOSE_DEST}
-        sed -i -e 's/wordpress.dev/'${SERVER_HOST}'/' ${NGINX_CONF_DEST}
-
-        read -p "You have set a hostname. Do you want to add it to /etc/hosts on your System? (y/n): " add_hosts
-
-        if [ "y" = $add_hosts ]; then
-            echo "${SERVER_IP} ${SERVER_HOST}" >> /etc/hosts
-        fi
-
-        rm ${NGINX_CONF_DEST}-e
-        rm ${DOCKER_COMPOSE_DEST}-e
-    fi
-
     $BIN_DIR/docker/start.sh
 
 elif [ "$1" = "stop" ]; then
@@ -82,6 +60,6 @@ elif [ "$1" = "install" ]; then
     source $BIN_DIR/docker/install.sh
 
 else
-    echo "Usage: $(basename $0) <start [hostname]|stop|test|clean|install>"
+    echo "Usage: $(basename $0) <start|stop|test|clean|install>"
     exit 1
 fi
