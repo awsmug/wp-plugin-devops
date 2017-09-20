@@ -82,5 +82,14 @@ else
     exit 1;
 fi
 
-echo "Copy docker compose file..."
-sed 's/.\/bin\/docker\/nginx\/default.conf/.\/vendor\/awsmug\/wp-plugin-devops\/bin\/docker\/nginx\/default.conf/' ${DEVOPS_PATH}/docker-compose.yml.dist > ${DOCKER_COMPOSE_FILE}
+read -p "Create a docker compose? (y/n) " add_docker_compose_file
+
+if [ "y" = add_docker_compose_file ]; then
+    sed 's/.\/bin\/docker\/nginx\/default.conf/.\/vendor\/awsmug\/wp-plugin-devops\/bin\/docker\/nginx\/default.conf/' ${DEVOPS_PATH}/docker-compose.yml.dist > ${DOCKER_COMPOSE_FILE}
+    echo "Compose files added."
+elif [ "n" = add_docker_compose_file ]; then
+    echo "No compose files added."
+else
+    echo "Please answer with (y) or (n). Installation interrupted."
+    exit 1;
+fi
