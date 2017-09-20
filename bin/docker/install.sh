@@ -89,7 +89,7 @@ if [ -z "$add_hostname" ]; then
     exit 1
 fi
 
-cp ${NGINX_CONF} ${NGINX_CONF_DESTT}
+cp ${NGINX_CONF} ${NGINX_CONF_DEST}
 
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${DOCKER_COMPOSE_DEST}
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${NGINX_CONF_DEST}
