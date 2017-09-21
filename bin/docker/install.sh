@@ -1,5 +1,23 @@
 #!/bin/bash
 
+if [ ! -d $DEVOPS_PATH ]; then
+    mkdir -p $DEVOPS_PATH
+fi
+
+# Setting up files
+if [ -d vendor/awsmug/wp-plugin-devops ]; then
+    # As Composer depency
+    export NGINX_CONF_REL=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
+    export NGINX_CONF=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
+    export NGINX_CONF_DEST_REL=devops/conf/default.conf
+    export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
+else
+    # Direct variant
+    export NGINX_CONF=${PLUGIN_PATH}/bin/docker/nginx/default.conf.dist
+    export NGINX_CONF_DEST_REL=devops/conf/default.conf
+    export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
+fi
+
 function add_to_gitignore {
     echo "###" >> $1
     echo "# Automatinc added files from WP Plugin Devops" >> $1
@@ -9,12 +27,6 @@ function add_to_gitignore {
     echo "webserver" >> $1
     echo "vendor" >> $1
     echo "wordpress" >> $1
-}
-
-function escape_sed() {
- sed \
-  -e 's/\//\\\//g' \
-  -e 's/\&/\\\&/g'
 }
 
 GITIGNORE_FILE="${PLUGIN_PATH}/.gitignore"

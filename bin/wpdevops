@@ -2,14 +2,14 @@
 
 # Setting up directory variables
 export SCRIPT_PATH=$(pwd)
-RELATIVE_LINK_DIR="$(dirname "$(readlink "$0")")"
-VENDOR_BIN_DIR="`dirname \"$0\"`"              # relative
-VENDOR_BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && pwd )`"  # absolutized and normalized
-export BIN_DIR="`( cd \"$VENDOR_BIN_DIR\" && cd \"$RELATIVE_LINK_DIR\" && pwd )`"
-export DEVOPS_PATH=$(dirname $BIN_DIR)
+RELATIVE_DIR="$(dirname "$(readlink "$0")")"
+BIN_PATH="`dirname \"$0\"`"              # relative
+BIN_PATH="`( cd \"$BIN_PATH\" && pwd )`"  # absolutized and normalized
+export BIN_DIR="`( cd \"$BIN_PATH\" && cd \"$RELATIVE_DIR\" && pwd )`"
+export DEVOPS_PATH="${SCRIPT_PATH}/devops"
 
-export SERVER_HOST="localhost"
-export SERVER_IP="10.221.50.20"
+echo $BIN_DIR
+echo $BIN_PATH
 
 # Setting up docker variables
 CONTAINER_PREFIX=$(basename ${SCRIPT_PATH})
@@ -22,41 +22,31 @@ export PLUGIN_PATH=$SCRIPT_PATH
 export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
 export REMOTE_PLUGIN_PATH=${PLUGIN_PATH}/wordpress/wp-content/plugins/
 
-mkdir -p devops/conf
 
 # Setting up files
 if [ -d vendor/awsmug/wp-plugin-devops ]; then
-    # As Composer depency
-    export NGINX_CONF_REL=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF_DEST_REL=devops/conf/default.conf
-    export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
-    export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/docker-compose.yml.dist
+    export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/devops/docker-compose.yml.dist
 else
-    # Direct variant
-    export NGINX_CONF=${PLUGIN_PATH}/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF_DEST_REL=devops/conf/default.conf
-    export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
-    export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/docker-compose.yml.dist
+    export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/devops/docker-compose.yml.dist
 fi
 
 export DOCKER_COMPOSE_DEST=${PLUGIN_PATH}/docker-compose.yml
 
 # Running command
 if [ "$1" = "start" ]; then
-    $BIN_DIR/docker/start.sh
+    source $BIN_DIR/docker/start.sh
 
 elif [ "$1" = "stop" ]; then
-    $BIN_DIR/docker/stop.sh
+    source $BIN_DIR/docker/stop.sh
 
 elif [ "$1" = "test" ]; then
-    $BIN_DIR/docker/test.sh $2
+    source $BIN_DIR/docker/test.sh $2
 
 elif [ "$1" = "sync" ]; then
-    $BIN_DIR/docker/sync.sh
+    source $BIN_DIR/docker/sync.sh
 
 elif [ "$1" = "clean" ]; then
-    $BIN_DIR/docker/clean.sh
+    source $BIN_DIR/docker/clean.sh
 
 elif [ "$1" = "install" ]; then
     source $BIN_DIR/docker/install.sh
