@@ -55,8 +55,8 @@ read -p "Create test files for behat? (y/n) " add_test_files
 
 if [ "y" = $add_test_files ]; then
     mkdir -p ${TEST_PATH}
-    cp ${DEVOPS_PATH}/behat.yml.dist ${CONF_PATH}/behat.yml
-    cp -R ${DEVOPS_PATH}/tests/behat/. ${TEST_PATH}/behat/
+    cp ${CONF_DIST_PATH}/behat.yml.dist ${CONF_PATH}/behat.yml
+    cp -R ${DIST_PATH}/tests/behat/ ${TEST_PATH}/behat/
     echo "behat.yml and test files added."
 fi
 
