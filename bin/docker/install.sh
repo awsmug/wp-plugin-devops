@@ -82,7 +82,7 @@ if [ -z "$add_hostname" ]; then
     exit 1
 fi
 
-cp ${CONF_DIST_PATH}/default.conf ${CONF_PATH}/default.conf
+cp ${CONF_DIST_PATH}/default.conf.dist ${CONF_PATH}/default.conf
 
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${CONF_PATH}/docker-compose.yml
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${CONF_PATH}/default.conf
