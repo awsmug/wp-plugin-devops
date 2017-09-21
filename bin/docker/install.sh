@@ -63,7 +63,7 @@ fi
 read -p "Create a travis file? (y/n) " add_travis_files
 
 if [ "y" = $add_travis_files ]; then
-    cp ${CONF_DISTH_PATH}/.travis.yml.dist ${PLUGIN_PATH}/.travis.yml
+    cp ${CONF_DIST_PATH}/.travis.yml.dist ${PLUGIN_PATH}/.travis.yml
     echo "travis.yml added."
 fi
 
