@@ -4,7 +4,7 @@ if [ ! -d $DEVOPS_PATH ]; then
     mkdir -p $DEVOPS_PATH
 fi
 
-mkdir -p $CONF_DIST_PATH
+mkdir -p $CONF_PATH
 
 function add_to_gitignore {
     echo "###" >> $1
@@ -55,24 +55,22 @@ read -p "Create test files for behat? (y/n) " add_test_files
 
 if [ "y" = $add_test_files ]; then
     mkdir -p ${TEST_PATH}
-    cp -R ${DEVOPS_PATH}/behat.yml ${CONF_PATH}/behat.yml
+    cp ${DEVOPS_PATH}/behat.yml.dist ${CONF_PATH}/behat.yml
     cp -R ${DEVOPS_PATH}/tests/behat/. ${TEST_PATH}/behat/
     echo "behat.yml and test files added."
 fi
 
-TRAVIS_FILE=${PLUGIN_PATH}/.travis.yml
-
 read -p "Create a travis file? (y/n) " add_travis_files
 
 if [ "y" = $add_travis_files ]; then
-    cp -R ${CONF_DISTH_PATH}/.travis.yml ${PLUGIN_PATH}/.travis.yml
+    cp -R ${CONF_DISTH_PATH}/.travis.yml.dist ${PLUGIN_PATH}/.travis.yml
     echo "travis.yml added."
 fi
 
 read -p "Create a docker compose? (y/n) " add_DOCKER_COMPOSE_DIST
 
 if [ "y" = $add_DOCKER_COMPOSE_DIST ]; then
-    cp ${CONF_DIST_PATH} ${CONF_PATH}/docker-compose.yml
+    cp ${CONF_DIST_PATH}/docker-compose.yml.dist ${CONF_PATH}/docker-compose.yml
 
     echo "docker-compose.yml added."
 fi
@@ -84,10 +82,10 @@ if [ -z "$add_hostname" ]; then
     exit 1
 fi
 
-cp ${NGINX_CONF_DIST} ${NGINX_CONF}
+cp ${CONF_DIST_PATH}/default.conf ${CONF_PATH}/default.conf
 
-sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${DOCKER_COMPOSE_DEST}
-sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${NGINX_CONF_DEST}
+sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${CONF_PATH}/docker-compose.yml
+sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${CONF_PATH}/default.conf
 
-rm ${NGINX_CONF_DEST}-e
-rm ${DOCKER_COMPOSE_DEST}-e
+rm ${CONF_PATH}/default.conf-e
+rm ${CONF_PATH}/docker-compose.yml-e
