@@ -1,55 +1,58 @@
 #!/bin/bash
 
-# Setting up directory variables
-export SCRIPT_PATH=$(pwd)
-RELATIVE_DIR="$(dirname "$(readlink "$0")")"
-BIN_PATH="`dirname \"$0\"`"              # relative
-BIN_PATH="`( cd \"$BIN_PATH\" && pwd )`"  # absolutized and normalized
-export BIN_DIR="`( cd \"$BIN_PATH\" && cd \"$RELATIVE_DIR\" && pwd )`"
-export DEVOPS_PATH="${SCRIPT_PATH}/devops"
+# Path where this script was startet from
+EXEC_PATH=$(pwd)
 
-echo $BIN_DIR
-echo $BIN_PATH
+# Path of the executed script
+RELATIVE_PATH="$(dirname "$(readlink "$0")")"
+SCRIPT_PATH="`dirname \"$0\"`"               # relative
+SCRIPT_PATH="`( cd \"$SCRIPT_PATH\" && pwd )`"  # absolutized and normalized
+
+# Path of executables
+export VENDOR_BIN_PATH="`( cd \"$SCRIPT_PATH\" && cd \"$RELATIVE_PATH\" && pwd )`"
+
+# Path for custom devop files for project
+export DEVOPS_PATH="${EXEC_PATH}/devops"
 
 # Setting up docker variables
-CONTAINER_PREFIX=$(basename ${SCRIPT_PATH})
+CONTAINER_PREFIX=$(basename ${EXEC_PATH})
 CONTAINER_PREFIX=${CONTAINER_PREFIX// /}
 export CONTAINER_PREFIX=${CONTAINER_PREFIX//-/}_
 export WP_CONTAINER_NAME="${CONTAINER_PREFIX}wp_1"
 
 # Setting up WP variables
-export PLUGIN_PATH=$SCRIPT_PATH
+export PLUGIN_PATH=${EXEC_PATH}
 export PLUGIN_SLUG=$(basename $PLUGIN_PATH)
 export REMOTE_PLUGIN_PATH=${PLUGIN_PATH}/wordpress/wp-content/plugins/
 
-
 # Setting up files
 if [ -d vendor/awsmug/wp-plugin-devops ]; then
-    export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/devops/docker-compose.yml.dist
+    DIST_PATH=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops
 else
-    export DOCKER_COMPOSE_FILE=${PLUGIN_PATH}/devops/docker-compose.yml.dist
+    DIST_PATH=${PLUGIN_PATH}
 fi
 
-export DOCKER_COMPOSE_DEST=${PLUGIN_PATH}/docker-compose.yml
+CONF_DIST_PATH=${DIST_PATH}/conf
+CONF_PATH=${PLUGIN_PATH}/conf
 
 # Running command
 if [ "$1" = "start" ]; then
-    source $BIN_DIR/docker/start.sh
+    source $VENDOR_BIN_PATH/docker/start.sh
 
 elif [ "$1" = "stop" ]; then
-    source $BIN_DIR/docker/stop.sh
+    source $VENDOR_BIN_PATH/docker/stop.sh
 
 elif [ "$1" = "test" ]; then
-    source $BIN_DIR/docker/test.sh $2
+    source $VENDOR_BIN_PATH/docker/test.sh $2
 
 elif [ "$1" = "sync" ]; then
-    source $BIN_DIR/docker/sync.sh
+    source $VENDOR_BIN_PATH/docker/sync.sh
 
 elif [ "$1" = "clean" ]; then
-    source $BIN_DIR/docker/clean.sh
+    source $VENDOR_BIN_PATH/docker/clean.sh
 
 elif [ "$1" = "install" ]; then
-    source $BIN_DIR/docker/install.sh
+    source $VENDOR_BIN_PATH/docker/install.sh
 
 else
     echo "Usage: $(basename $0) <start|stop|test|clean|install>"

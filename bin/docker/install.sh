@@ -4,19 +4,7 @@ if [ ! -d $DEVOPS_PATH ]; then
     mkdir -p $DEVOPS_PATH
 fi
 
-# Setting up files
-if [ -d vendor/awsmug/wp-plugin-devops ]; then
-    # As Composer depency
-    export NGINX_CONF_REL=vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF=${PLUGIN_PATH}/vendor/awsmug/wp-plugin-devops/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF_DEST_REL=devops/conf/default.conf
-    export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
-else
-    # Direct variant
-    export NGINX_CONF=${PLUGIN_PATH}/bin/docker/nginx/default.conf.dist
-    export NGINX_CONF_DEST_REL=devops/conf/default.conf
-    export NGINX_CONF_DEST=${PLUGIN_PATH}/${NGINX_CONF_DEST_REL}
-fi
+mkdir -p $CONF_DIST_PATH
 
 function add_to_gitignore {
     echo "###" >> $1
@@ -48,7 +36,7 @@ fi
 read -p "Create a main plugin file? (y/n) " add_plugin_file
 
 if [ "y" = $add_plugin_file ]; then
-    cp ${DEVOPS_PATH}/plugin.php ${PLUGIN_PATH}/plugin.php
+    cp ${DIST_PATH}/plugin.php ${PLUGIN_PATH}/plugin.php
     echo "plugin.php added."
 fi
 
@@ -57,19 +45,19 @@ TEST_PATH=${PLUGIN_PATH}/tests
 read -p "Create test files for PHPUnit? (y/n) " add_test_files
 
 if [ "y" = $add_test_files ]; then
-    mkdir -p $TEST_PATH
-    cp -R ${DEVOPS_PATH}/phpunit.xml ${PLUGIN_PATH}/phpunit.xml
-    cp -R ${DEVOPS_PATH}/tests/phpunit/. $TEST_PATH/phpunit/
-    echo "PHPUnit est files added."
+    mkdir -p ${TEST_PATH}
+    cp -R ${CONF_DIST_PATH}/phpunit.xml.dist ${PLUGIN_PATH}/conf/phpunit.xml
+    cp -R ${DIST_PATH}/tests/phpunit/. ${TEST_PATH}/phpunit/
+    echo "phpunit.xml PHPUnit files added."
 fi
 
 read -p "Create test files for behat? (y/n) " add_test_files
 
 if [ "y" = $add_test_files ]; then
-    mkdir -p $TEST_PATH
-    cp -R ${DEVOPS_PATH}/behat.yml ${PLUGIN_PATH}/behat.yml
-    cp -R ${DEVOPS_PATH}/tests/behat/. $TEST_PATH/behat/
-    echo "behat test files added."
+    mkdir -p ${TEST_PATH}
+    cp -R ${DEVOPS_PATH}/behat.yml ${CONF_PATH}/behat.yml
+    cp -R ${DEVOPS_PATH}/tests/behat/. ${TEST_PATH}/behat/
+    echo "behat.yml and test files added."
 fi
 
 TRAVIS_FILE=${PLUGIN_PATH}/.travis.yml
@@ -77,21 +65,16 @@ TRAVIS_FILE=${PLUGIN_PATH}/.travis.yml
 read -p "Create a travis file? (y/n) " add_travis_files
 
 if [ "y" = $add_travis_files ]; then
-    cp -R ${DEVOPS_PATH}/.travis.yml ${PLUGIN_PATH}/.travis.yml
-    echo "Test files added."
+    cp -R ${CONF_DISTH_PATH}/.travis.yml ${PLUGIN_PATH}/.travis.yml
+    echo "travis.yml added."
 fi
 
-read -p "Create a docker compose? (y/n) " add_docker_compose_file
+read -p "Create a docker compose? (y/n) " add_DOCKER_COMPOSE_DIST
 
-if [ "y" = $add_docker_compose_file ]; then
-    search='bin/docker/nginx/default.conf'
-    replace=${NGINX_CONF_DEST_REL}
+if [ "y" = $add_DOCKER_COMPOSE_DIST ]; then
+    cp ${CONF_DIST_PATH} ${CONF_PATH}/docker-compose.yml
 
-    cp ${DOCKER_COMPOSE_FILE} ${DOCKER_COMPOSE_DEST}
-
-    sed -i -e "s/${search//\//\\/}/${replace//\//\\/}/g" "${DOCKER_COMPOSE_DEST}"
-    rm ${DOCKER_COMPOSE_DEST}-e
-    echo "Compose files added."
+    echo "docker-compose.yml added."
 fi
 
 read -p "Please enter a hostname: " add_hostname
@@ -101,7 +84,7 @@ if [ -z "$add_hostname" ]; then
     exit 1
 fi
 
-cp ${NGINX_CONF} ${NGINX_CONF_DEST}
+cp ${NGINX_CONF_DIST} ${NGINX_CONF}
 
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${DOCKER_COMPOSE_DEST}
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${NGINX_CONF_DEST}

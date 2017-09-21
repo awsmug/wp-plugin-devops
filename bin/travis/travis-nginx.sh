@@ -28,13 +28,13 @@ mkdir -p "$NGINX_DIR/sites-enabled"
 PHP_FPM_CONF="$NGINX_DIR/php-fpm.conf"
 
 # Start php-fpm.
-tpl "$BIN_DIR/travis/conf/php-fpm.tpl.conf" "$PHP_FPM_CONF"
+tpl "$VENDOR_BIN_PATH/travis/conf/php-fpm.tpl.conf" "$PHP_FPM_CONF"
 "$PHP_FPM_BIN" --allow-to-run-as-root --fpm-config "$PHP_FPM_CONF"
 
 # Build the default nginx config files.
-tpl "$BIN_DIR/travis/conf/nginx.tpl.conf" "$NGINX_DIR/nginx.conf"
-tpl "$BIN_DIR/travis/conf/fastcgi.tpl.conf" "$NGINX_DIR/fastcgi.conf"
-tpl "$BIN_DIR/travis/conf/default-site.tpl.conf" "$NGINX_DIR/sites-enabled/default-site.conf"
+tpl "$VENDOR_BIN_PATH/travis/conf/nginx.tpl.conf" "$NGINX_DIR/nginx.conf"
+tpl "$VENDOR_BIN_PATH/travis/conf/fastcgi.tpl.conf" "$NGINX_DIR/fastcgi.conf"
+tpl "$VENDOR_BIN_PATH/travis/conf/default-site.tpl.conf" "$NGINX_DIR/sites-enabled/default-site.conf"
 
 nginx -s stop
 nginx -V -t -c "$NGINX_DIR/nginx.conf"

@@ -2,12 +2,12 @@
 
 echo "Starting webserver..."
 
-docker-compose -f ${DOCKER_COMPOSE_DEST} up -d
+docker-compose -f ${CONF_PATH}/docker-compose.yml up -d
 
 echo "Initializing project..." >&2
 
 echo "Waiting for Database Container..."
-${BIN_DIR}/docker/waitfor localhost 3306 # Does not take effect right now
+${VENDOR_BIN_PATH}/docker/waitfor localhost 3306 # Does not take effect right now
 
 echo "Database ready."
 
