@@ -63,13 +63,13 @@ fi
 read -p "Create a travis file? (y/n) " add_travis_files
 
 if [ "y" = $add_travis_files ]; then
-    cp -R ${CONF_DISTH_PATH}/.travis.yml.dist ${PLUGIN_PATH}/.travis.yml
+    cp ${CONF_DISTH_PATH}/.travis.yml.dist ${PLUGIN_PATH}/.travis.yml
     echo "travis.yml added."
 fi
 
-read -p "Create a docker compose? (y/n) " add_DOCKER_COMPOSE_DIST
+read -p "Create a docker compose? (y/n) " add_docker_compose
 
-if [ "y" = $add_DOCKER_COMPOSE_DIST ]; then
+if [ "y" = $add_docker_compose ]; then
     cp ${CONF_DIST_PATH}/docker-compose.yml.dist ${CONF_PATH}/docker-compose.yml
 
     echo "docker-compose.yml added."
