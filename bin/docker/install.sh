@@ -84,8 +84,8 @@ fi
 
 cp ${CONF_DIST_PATH}/default.conf.dist ${CONF_PATH}/default.conf
 
-sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${CONF_PATH}/docker-compose.yml
+sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${PLUGIN_PATH}/docker-compose.yml
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${CONF_PATH}/default.conf
 
 rm ${CONF_PATH}/default.conf-e
-rm ${CONF_PATH}/docker-compose.yml-e
+rm ${PLUGIN_PATH}/docker-compose.yml-e
