@@ -24,7 +24,7 @@ docker exec ${WP_CONTAINER_NAME} wp plugin update --all --path=/var/www/html
 docker exec ${WP_CONTAINER_NAME} wp theme update --all --path=/var/www/html
 
 docker exec ${WP_CONTAINER_NAME} mkdir -p ${REMOTE_PLUGIN_PATH}
-${BIN_DIR}/docker/sync.sh
+${VENDOR_BIN_PATH}/docker/sync.sh
 docker exec ${WP_CONTAINER_NAME} wp plugin activate ${PLUGIN_SLUG} --path=/var/www/html
 
 # Custom user scripts

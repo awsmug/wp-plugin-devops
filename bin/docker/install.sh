@@ -1,10 +1,8 @@
 #!/bin/bash
 
-if [ ! -d $DEVOPS_PATH ]; then
-    mkdir -p $DEVOPS_PATH
+if [ ! -d $CONF_PATH ]; then
+    mkdir -p $CONF_PATH
 fi
-
-mkdir -p $CONF_PATH
 
 function add_to_gitignore {
     echo "###" >> $1

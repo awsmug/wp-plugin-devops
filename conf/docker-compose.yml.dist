@@ -14,7 +14,7 @@ services:
       WP_URL: localhost
       WP_INSTALL: "fresh"
     volumes:
-      - ../wordpress:/var/www/html
+      - ./wordpress:/var/www/html
     depends_on:
       - db
       - php
@@ -30,7 +30,7 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ../wordpress:/var/www/html
+      - ./wordpress:/var/www/html
     environment:
       PHP_VERSION: "7.1.8"
   db:
@@ -54,7 +54,7 @@ services:
   behat:
     image: mahype/wordhat:latest
     volumes:
-      - ../:/src
+      - ./:/src
     # Run a built-in web server for access to HTML reports
     ports:
       - 8081:8000
