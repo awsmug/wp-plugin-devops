@@ -2,7 +2,7 @@
 
 echo "Starting webserver..."
 
-docker-compose -f ${CONF_PATH}/docker-compose.yml up -d
+docker-compose -f ${PLUGIN_PATH}/docker-compose.yml up -d
 
 echo "Initializing project..." >&2
 

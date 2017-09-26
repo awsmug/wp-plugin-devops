@@ -70,7 +70,7 @@ fi
 read -p "Create a docker compose? (y/n) " add_docker_compose
 
 if [ "y" = $add_docker_compose ]; then
-    cp ${CONF_DIST_PATH}/docker-compose.yml.dist ${CONF_PATH}/docker-compose.yml
+    cp ${CONF_DIST_PATH}/docker-compose.yml.dist ${PLUGIN_PATH}/docker-compose.yml
 
     echo "docker-compose.yml added."
 fi
