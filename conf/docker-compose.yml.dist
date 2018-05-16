@@ -7,7 +7,7 @@ services:
       MYSQL_DB: wp
       MYSQL_USER: root
       MYSQL_PASS: p4ssw0rd!
-      WP_VERSION: 4.8.2
+      WP_VERSION: 4.9.5
       WP_LOCALE: en_US
       WP_USER: admin
       WP_PASS: password
@@ -28,11 +28,11 @@ services:
   php:
     image: mahype/phpbrew:latest
     ports:
-      - "9000:9000"
+      - "911:911"
     volumes:
       - ./wordpress:/var/www/html
     environment:
-      PHP_VERSION: "7.1.8"
+      PHP_VERSION: "7.2.0"
   db:
     image: mariadb
     environment:
