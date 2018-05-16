@@ -2,6 +2,8 @@
 
 echo "Starting webserver..."
 
+echo Loading ${PLUGIN_PATH}/docker-compose.yml
+
 docker-compose -f ${PLUGIN_PATH}/docker-compose.yml up -d
 
 echo "Initializing project..." >&2

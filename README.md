@@ -14,6 +14,12 @@ Add WP Plugin Devops functionality by using Composer.
 composer require awsmug/wp-plugin-devops:dev-master
 ```
 
+Install the environment by setting up config files for git, composer, phpunit and so on.
+
+```bash
+vendor/bin/wpdevops install
+```
+
 Start the local server.
 
 ```bash
