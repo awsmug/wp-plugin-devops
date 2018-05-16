@@ -32,6 +32,12 @@ Stop the local server.
 vendor/bin/wpdevops stop
 ```
 
+After the changes were made, sync your data to the docker container.
+
+```bash
+vendor/bin/wpdevops sync
+```
+
 Clean up all automatic produced scripts.
 
 ```bash
