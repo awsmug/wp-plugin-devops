@@ -13,3 +13,4 @@ project.sh
 wordpress
 test
 webserver
+node_modules
