@@ -1,22 +1,10 @@
 #!/bin/sh
 
-echo "This will delete attached docker containers, mapped directories and evetually added data. Do you want to continue (y/n)? "
-read ANSWER
+echo "This will delete attached docker containers, mapped directories and eventually added data. Do you want to continue (y/n)? " read ANSWER
 
 if echo "$ANSWER" | grep -iq "^y" ;then
 
     echo "Start cleaning up project..."
-
-    # Get configuration
-    echo "Reading config...." >&2
-
-    if [ -f "${PLUGIN_PATH}/project.cfg" ]; then
-        echo "Reading configuration file..." >&2
-        source $PLUGIN_PATH/project.cfg
-    else
-        echo "Failed: Configuration file not found!";
-        exit 1
-    fi
 
     # Stopping docker and cleaning files up
     docker-compose -f "${PLUGIN_PATH}/docker-compose.yml" down
@@ -26,8 +14,6 @@ if echo "$ANSWER" | grep -iq "^y" ;then
     # Removing directories
     rm -rf "${PLUGIN_PATH}/wordpress"
     rm -rf "${PLUGIN_PATH}/log"
-
-
 
     echo "Cleaned up project!"
 
