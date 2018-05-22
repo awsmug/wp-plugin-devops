@@ -1,6 +1,7 @@
 #!/bin/sh
 
-echo "This will delete attached docker containers and mapped directories. Do you want to continue (y/n)? " read ANSWER
+echo "This will delete attached docker containers and mapped directories. Do you want to continue (y/n)?"
+read ANSWER
 
 if echo "$ANSWER" | grep -iq "^y" ;then
 
