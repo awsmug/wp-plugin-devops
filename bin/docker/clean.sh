@@ -10,7 +10,7 @@ if echo "$ANSWER" | grep -iq "^y" ;then
     # Stopping docker and cleaning files up
     docker-compose -f "${PLUGIN_PATH}/docker-compose.yml" down
     docker rm $(docker ps -a -q)
-    docker rmi -f $(docker images | grep dockerwebserver_ | tr -s ' ' | cut -d ' ' -f 3)
+    docker rmi -f $(docker images | grep ${CONTAINER_PREFIX} | tr -s ' ' | cut -d ' ' -f 3)
 
     # Removing directories
     rm -rf "${PLUGIN_PATH}/wordpress"
