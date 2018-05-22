@@ -1,8 +1,6 @@
 #!/bin/sh
 
-echo "Starting webserver..."
-
-echo Loading ${PLUGIN_PATH}/docker-compose.yml
+echo "Starting webserver..."å
 
 docker-compose -f ${PLUGIN_PATH}/docker-compose.yml up -d
 

@@ -73,11 +73,11 @@ if [ "y" = $add_docker_compose ]; then
     echo "docker-compose.yml added."
 fi
 
-read -p "Please enter a hostname: " add_hostname
+read -p "Please enter a hostname (localhost): " add_hostname
 
 if [ -z "$add_hostname" ]; then
-    echo "No host entered."
-    exit 1
+    echo "No host entered, using localhost."
+    add_hostname = 'localhost'
 fi
 
 cp ${CONF_DIST_PATH}/default.conf.dist ${CONF_PATH}/default.conf
