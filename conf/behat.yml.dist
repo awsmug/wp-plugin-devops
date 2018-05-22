@@ -11,7 +11,7 @@ default:
 
   extensions:
     Behat\MinkExtension:
-      base_url: http://wordpress
+      base_url: http://wordpress.test
       browser_name: chrome
       default_session: default
       javascript_session: selenium2
