@@ -6,7 +6,7 @@ services:
       MYSQL_HOST: db
       MYSQL_DB: wp
       MYSQL_USER: root
-      MYSQL_PASS: p4ssw0rd!
+      MYSQL_PASS: my_password
       WP_VERSION: 4.9.6
       WP_LOCALE: en_US
       WP_USER: admin
