@@ -3,5 +3,4 @@ log
 vendor
 wordpress
 composer.lock
-docker-compose.yml
 bin/docker/nginx/default.conf
