@@ -42,7 +42,7 @@ read -p "Create test files for PHPUnit? (y/n) " add_test_files
 
 if [ "y" = $add_test_files ]; then
     mkdir -p ${TEST_PATH}
-    cp -R ${CONF_DIST_PATH}/phpunit.xml.dist ${PLUGIN_PATH}/conf/phpunit.xml
+    cp -R ${CONF_DIST_PATH}/phpunit.xml ${PLUGIN_PATH}/conf/phpunit.xml
     cp -R ${DIST_PATH}/tests/phpunit/. ${TEST_PATH}/phpunit/
     echo "phpunit.xml PHPUnit files added."
 fi
@@ -51,7 +51,7 @@ read -p "Create test files for behat? (y/n) " add_test_files
 
 if [ "y" = $add_test_files ]; then
     mkdir -p ${TEST_PATH}
-    cp ${CONF_DIST_PATH}/behat.yml.dist ${CONF_PATH}/behat.yml
+    cp ${CONF_DIST_PATH}/behat.yml ${CONF_PATH}/behat.yml
     cp -R ${DIST_PATH}/tests/behat/ ${TEST_PATH}/behat/
     echo "behat.yml and test files added."
 fi
@@ -59,14 +59,14 @@ fi
 read -p "Create a travis file? (y/n) " add_travis_files
 
 if [ "y" = $add_travis_files ]; then
-    cp ${CONF_DIST_PATH}/.travis.yml.dist ${PLUGIN_PATH}/.travis.yml
+    cp ${CONF_DIST_PATH}/.travis.yml ${PLUGIN_PATH}/.travis.yml
     echo "travis.yml added."
 fi
 
 read -p "Create a docker compose? (y/n) " add_docker_compose
 
 if [ "y" = $add_docker_compose ]; then
-    cp ${CONF_DIST_PATH}/docker-compose.yml.dist ${PLUGIN_PATH}/docker-compose.yml
+    cp ${CONF_DIST_PATH}/docker-compose.yml ${PLUGIN_PATH}/docker-compose.yml
 
     echo "docker-compose.yml added."
 fi
@@ -75,10 +75,15 @@ read -p "Please enter a hostname (localhost): " add_hostname
 
 if [ -z "$add_hostname" ]; then
     echo "No host entered, using localhost."
-    add_hostname = 'localhost'
+    add_hostname='localhost'
 fi
 
-cp ${CONF_DIST_PATH}/default.conf.dist ${CONF_PATH}/default.conf
+mkdir ${CONF_PATH}/php
+cp ${CONF_DIST_PATH}/pho/Dockerfile ${CONF_PATH}/php/Dockerfile
+cp ${CONF_DIST_PATH}/pho/php.ini ${CONF_PATH}/php/php.ini
+
+mkdir ${CONF_PATH}/nginx
+cp ${CONF_DIST_PATH}/nginx/default.conf ${CONF_PATH}/nginx/default.conf
 
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${PLUGIN_PATH}/docker-compose.yml
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${CONF_PATH}/default.conf
