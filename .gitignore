@@ -1,6 +1,4 @@
 .idea
-log
 vendor
 wordpress
 composer.lock
-bin/docker/nginx/default.conf
