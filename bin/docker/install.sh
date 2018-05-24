@@ -79,8 +79,8 @@ if [ -z "$add_hostname" ]; then
 fi
 
 mkdir ${CONF_PATH}/php
-cp ${CONF_DIST_PATH}/pho/Dockerfile ${CONF_PATH}/php/Dockerfile
-cp ${CONF_DIST_PATH}/pho/php.ini ${CONF_PATH}/php/php.ini
+cp ${CONF_DIST_PATH}/php/Dockerfile ${CONF_PATH}/php/Dockerfile
+cp ${CONF_DIST_PATH}/php/php.ini ${CONF_PATH}/php/php.ini
 
 mkdir ${CONF_PATH}/nginx
 cp ${CONF_DIST_PATH}/nginx/default.conf ${CONF_PATH}/nginx/default.conf
