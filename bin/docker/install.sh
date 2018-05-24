@@ -86,7 +86,7 @@ mkdir ${CONF_PATH}/nginx
 cp ${CONF_DIST_PATH}/nginx/default.conf ${CONF_PATH}/nginx/default.conf
 
 sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${PLUGIN_PATH}/docker-compose.yml
-sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${CONF_PATH}/default.conf
+sed -i -e 's/wordpress.dev/'${add_hostname}'/' ${CONF_PATH}/nginx/default.conf
 
-rm ${CONF_PATH}/default.conf-e
+rm ${CONF_PATH}/nginx/default.conf-e
 rm ${PLUGIN_PATH}/docker-compose.yml-e
