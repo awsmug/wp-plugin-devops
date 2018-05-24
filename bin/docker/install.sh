@@ -10,9 +10,7 @@ function add_to_gitignore {
     echo "###" >> $1
     echo "composer.lock" >> $1
     echo "test" >> $1
-    echo "webserver" >> $1
     echo "vendor" >> $1
-    echo "wordpress" >> $1
 }
 
 GITIGNORE_FILE="${PLUGIN_PATH}/.gitignore"
