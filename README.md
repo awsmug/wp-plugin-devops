@@ -1,4 +1,6 @@
-# WordPress Plugin Devops
+# WordPress Plugin Devops (deprecated/discontinued)
+
+Please use the [WP Devops](https://github.com/awsmug/wp-devops) instead of the WordPress Plugins devops.
 
 ## Setting everything up
 
